@@ -11,16 +11,24 @@
 	let className
 	export { className as class }
 
-	const isExcluded = eventTarget => {
-		return excludedElements.includes(eventTarget)
-	}
+	const isClickedOnExcluded = eventTarget => {
+		let status = false
 
-	const isSlotWraper = eventTarget => {
-		return wrapper.contains(eventTarget)
+		for (let i = 0; i < excludedElements.length; i++) {
+			if ( excludedElements[i].contains(eventTarget) ) {
+				status = true
+				break
+			}
+		}
+
+		return status
 	}
 
 	const onWindowClick = event => {
-		if (!isSlotWraper(event.target) && !isExcluded(event.target)) {
+		if (
+			! wrapper.contains(event.target) &&
+			! isClickedOnExcluded(event.target)
+		) {
 			dispatch('clickOutside')
 		}
 	}
