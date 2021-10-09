@@ -3,9 +3,10 @@ A SvelteJS component that allows you to listen for clicks outside of an element.
 
 ### Install
 You need to install it in the `devDependencies`.
+
+We are going to use [pnpm](https://pnpm.io). pnpm is a package manager like npm. You can use anything else instead.
+
 ```
-npm i -D babakfp/svelte-click-outside
-yarn add babakfp/svelte-click-outside --dev
 pnpm add -D babakfp/svelte-click-outside
 ```
 
@@ -13,7 +14,7 @@ pnpm add -D babakfp/svelte-click-outside
 ```
 git clone https://github.com/babakfp/svelte-click-outside.git
 cd svelte-click-outside
-pnpm i // You can also use npm or yarn
+pnpm i
 pnpm dev
 ```
 
