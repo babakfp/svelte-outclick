@@ -4,7 +4,9 @@
 
 	let excludedElements = []
 	export { excludedElements as exclude }
-	let slotWraper
+
+	// The element that wraps all elements that goes inside the slot.
+	let wrapper
 
 	let className
 	export { className as class }
@@ -14,7 +16,7 @@
 	}
 
 	const isSlotWraper = eventTarget => {
-		return slotWraper.contains(eventTarget)
+		return wrapper.contains(eventTarget)
 	}
 
 	const onWindowClick = event => {
@@ -26,6 +28,6 @@
 
 <svelte:window on:click={onWindowClick} />
 
-<div class={className} bind:this={slotWraper}>
+<div class={className} bind:this={wrapper}>
 	<slot />
 </div>
