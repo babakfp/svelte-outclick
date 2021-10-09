@@ -9,6 +9,14 @@ yarn add babakfp/svelte-click-outside --dev
 pnpm add -D babakfp/svelte-click-outside
 ```
 
+### Install demo
+```
+git clone https://github.com/babakfp/svelte-click-outside.git
+cd svelte-click-outside
+pnpm i // You can also use npm or yarn
+pnpm dev
+```
+
 ### How to use it
 See the [demo](src/App.svelte).
 
