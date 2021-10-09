@@ -1,0 +1,7 @@
+/node_modules
+/public/build
+
+/pnpm-lock.*
+/.pnpm-debug.*
+
+.DS_Store
