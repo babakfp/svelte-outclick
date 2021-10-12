@@ -2,27 +2,31 @@
 	import ClickOutside from './ClickOutside.svelte'
 
 	let open = false
-	let excludeHandleOne
-
-	const toggleContent =_=> open = !open
-	const closeContent =_=> open = false
+	let excludeHandle
 </script>
 
-<button
-	class="toggle-content"
-	bind:this={excludeHandleOne}
-	on:click={toggleContent}
->
-	Click Me
-	<span>Excluded</span>
-</button>
+<div class="btns-wrapper">
+	<button
+		class="btn btn--brand"
+		bind:this={excludeHandle}
+		on:click={_=> open = !open}
+	>
+		Toggle Content
+		<span>Excluded</span>
+	</button>
+	
+	<button	class="btn btn--second">
+		Useless btn
+		<span>Not Excluded</span>
+	</button>
+</div>
 
 <div class="my-div">
 	{#if open}
 		<ClickOutside
 			class="component-wrapper-element"
-			on:clickOutside={closeContent}
-			exclude={[excludeHandleOne]}
+			on:clickOutside={_=> open = false}
+			exclude={[excludeHandle]}
 		>
 			Click outside of the box to close it.
 		</ClickOutside>
@@ -34,12 +38,14 @@
 		display: grid;
 		align-items: center;
 		justify-content: center;
-		max-width: 16rem;
-		padding: 1rem;
+		padding: 2rem;
 		background: #F8FAFC;
 		border: 2px dashed #CBD5E1;
 		border-radius: .75rem;
 		line-height: 1.5rem;
-		font-size: .875rem;
+		text-align: center;
+	}
+	.btns-wrapper {
+		display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
 	}
 </style>

@@ -1,28 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap');
+
+/* Variables */
+
+:root {
+	--brand: #2563EB;
+	--brand-rgb: 37, 99, 235;
+	--gray-700: #334155;
+	--gray-700-rgb: 51, 65, 85;
+	--second: var(--gray-700);
+	--second-rgb: var(--gray-700-rgb);
+	--btn-shadow-nums: 0 .25rem .75rem;
+	--btn-shadow-opacity: .4;
+	--font-family: "Montserrat Alternates", sans-serif;
+}
 
 /* Reset */
 
+html {
+	font-size: 18px
+}
+
 * {
-	outline: none;
 	margin: 0;
 	padding: 0;
 	border: none;
+	outline: none;
+	font-size: 1rem;
+}
+
+::selection {
+  background: var(--brand);
+	color: white;
 }
 
 body, button {
-	font-family: 'Montserrat', sans-serif;
+	font-family: var(--font-family);
 }
 
 body {
 	display: grid;
-	gap: 1.5rem;
 	justify-content: center;
 	justify-items: center;
+	gap: 1.5rem;
 	max-width: 32rem;
 	padding: 2rem 1rem;
 	margin-left: auto;
 	margin-right: auto;
-	color: #334155;
+	color: var(--gray-700);
 	font-weight: 500;
 }
 
@@ -32,20 +56,42 @@ button {
 
 /* Styles */
 
-.toggle-content {
-	max-width: 16rem;
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: .75rem;
+	height: 3.5rem;
 	padding: 1rem 1.5rem;
-	background: #2563EB;
-	color: white;
+	border: 2px solid transparent;
 	border-radius: .75rem;
-	transition: 300ms;
+	transition: 300ms ease-in-out;
+	white-space: nowrap;
 	line-height: 1;
 }
 
-.toggle-content span {
-	font-size: .5rem;
+.btn span {
+	font-size: .625rem;
+	align-self: end;
 }
 
-.toggle-content:hover {
-	box-shadow: 0 8px 8px rgb(37, 99, 235, .2)
+.btn--brand,
+.btn--second {
+	color: white;
+}
+
+.btn--brand {
+	background: var(--brand);
+}
+
+.btn--brand:hover {
+	box-shadow: var(--btn-shadow-nums) rgba(var(--brand-rgb), var(--btn-shadow-opacity))
+}
+
+.btn--second {
+	background: var(--second);
+}
+
+.btn--second:hover {
+	box-shadow: var(--btn-shadow-nums) rgba(var(--second-rgb), var(--btn-shadow-opacity))
 }
