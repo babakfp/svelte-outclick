@@ -10,7 +10,7 @@ Install it in 'devDependencies'.
 [Pnpm](https://pnpm.io) is a package manager like npm. You can use any other package manager instead.
 
 ## How to use
-See the [demo](src/App.svelte).
+See the [Demo file](src/App.svelte).
 
 It works same as the Javascripts Click Event. An click event attached to the entire window and checks whether the target is contained within the element.
 
