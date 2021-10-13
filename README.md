@@ -10,7 +10,44 @@ Install it in 'devDependencies'.
 [Pnpm](https://pnpm.io) is a package manager like npm. You can use any other package manager instead.
 
 ## How to use
-See the [Demo file](src/App.svelte).
+```HTML
+<script>
+	// The component
+	import ClickOutside from './ClickOutside.svelte'
+
+	let open = false
+	let excludeHandle
+</script>
+
+<button
+	bind:this={excludeHandle}
+	on:click={_=> open = !open}
+>
+	Toggle Content
+</button>
+
+<!-- You need this wrapper to be able to style the components wrapper globally. -->
+<div class="my-div">
+	{#if open}
+		<ClickOutside
+			class="component-wrapper-element"
+			on:clickOutside={_=> open = false}
+			exclude={[excludeHandle]}
+		>
+			Click outside of the box to close it.
+		</ClickOutside>
+	{/if}
+</div>
+
+<style>
+	/* We are styling the components wrapper */
+	.my-div :global(.component-wrapper-element) {
+		background: #FF3E00;
+	}
+</style>
+```
+
+See the [Demo file](src/App.svelte) for more.
 
 It works same as the Javascripts Click Event. An click event attached to the entire window and checks whether the target is contained within the element.
 
