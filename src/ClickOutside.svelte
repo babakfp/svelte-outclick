@@ -2,15 +2,21 @@
 	import { createEventDispatcher } from 'svelte'
 	const dispatch = createEventDispatcher()
 
+	// DOM elements that get excluded from the event target.
 	let excludedElements = []
 	export { excludedElements as exclude }
 
-	// The element that wraps all elements that goes inside the slot.
-	let wrapper
-
+	// A real class name attr as prop.
 	let className
 	export { className as class }
+	
+	// Using CSS `display: contents` to somehow ignore the wrapper element.
+	export let disableWrapper = true
+	
+	// DOM element that wraps all stuff that goes inside the component slot.
+	let wrapper
 
+	// Whether the excluded elements contain the event target or not.
 	const isClickedOnExcluded = eventTarget => {
 		let status = false
 
@@ -34,8 +40,13 @@
 	}
 </script>
 
+<!-- We have this to capture the window on click event. -->
 <svelte:window on:click={onWindowClick} />
 
-<div class={className} bind:this={wrapper}>
+<div
+	bind:this={wrapper}
+	class={className}
+	style={disableWrapper && 'display: contents'}
+>
 	<slot />
 </div>

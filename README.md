@@ -1,76 +1,50 @@
-# Svelte Click Outside
-A SvelteJS component that allows you to listen for clicks outside of an element.
+In short `on:clickOutside`. This is a simple Svelte component that allows you to listen for clicks outside of an element.
+- No extra wrapper (it's optional)
+- Exclude other elements from event target
 
-## Install
+## Installation
 ```
 pnpm add -D babakfp/svelte-click-outside
 ```
+Most installed in 'devDependencies'.
 
-Install it in 'devDependencies'.
 [Pnpm](https://pnpm.io) is a package manager like npm. You can use any other package manager instead.
 
 ## How to use
-```HTML
-<script>
-	// The component
-	import ClickOutside from './ClickOutside.svelte'
+It works same as the Javascripts Click Event. An click event attached to the entire window and checks whether the target is contained within the element, or not. if not, it's a outside click. There is also a `exclude` prop taht you can use (continue to learn more).
 
-	let open = false
-	let excludeHandle
-</script>
+### No Wrapper & With Wrapper
+You can visit the demo files [NoWrapper demo](src/NoWrapper.svelte) / [WithWrapper demo](src/WithWrapper.svelte) to learn how to use the component.
 
-<button
-	bind:this={excludeHandle}
-	on:click={_=> open = !open}
->
-	Toggle Content
-</button>
-
-<!-- You need this wrapper to be able to style the components wrapper globally. -->
-<div class="my-div">
-	{#if open}
-		<ClickOutside
-			class="component-wrapper-element"
-			on:clickOutside={_=> open = false}
-			exclude={[excludeHandle]}
-		>
-			Click outside of the box to close it.
-		</ClickOutside>
-	{/if}
-</div>
-
-<style>
-	/* We are styling the components wrapper */
-	.my-div :global(.component-wrapper-element) {
-		background: #FF3E00;
-	}
-</style>
-```
-
-See the [Demo file](src/App.svelte) for more.
-
-It works same as the Javascripts Click Event. An click event attached to the entire window and checks whether the target is contained within the element.
-
+#### With Wrapper
 element/elements inside the component tags going to be wrapped inside a div element. You can style it by a `class` prop.
 ```HTML
-<ClickOutside class="my-class my-class-two" />
+<ClickOutside class="your-class" />
 ```
 
 Also you need to have a parent element to wrap the component inside it, to be able to add your custom styles for the component wrapper element.
 ```HTML
-<div class="my-div">
-	<ClickOutside class="my-class my-class-two" />
-</div>
+<section>
+	<ClickOutside class="your-class" />
+</section>
 
 <style>
-	div :global(.my-class) {
-		/*  */
-	}
+	section :global(.your-class) {}
 </style>
 ```
 
-### Exclusions
+In [NoWrapper demo](src/NoWrapper.svelte) we use a value calleed `contents` for CSS `display` property (`display: contents`). In [WithWrapper demo](src/WithWrapper.svelte) we don't use that CSS property.
+
+### Props
+
+#### `exclude` (default: `[]`)
 By default, clicking on any element outside of the wrapped element will cause the event to trigger. You can specify excluded elements that will not trigger the event. For example, a button that triggers a popup must be excluded. Otherwise, it will immediately close the popup when it is opened. The component has an `exclude` prop that expects an array of DOM nodes. Clicks on those nodes (and their children) will be ignored.
+
+#### `class` (default: nothing)
+same as the CSS `class` property, it's for the wrapper class. You don't need to use this if `disableWrapper` prop was equal to `true` (it is by default).
+
+#### disableWrapper (default: `true`)
+If it was equal to `true`, the component wrapper `<div><slot /></div>` going to be ignored by the browser because of the `display: contents`. It's only ignored by the CSS perspective. For spacial reasons, if you need this wrapper, look at the "With Wrapper" explanation.
 
 ## Install demo
 ```
