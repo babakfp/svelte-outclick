@@ -14,7 +14,7 @@ Most installed in 'devDependencies'.
 It works same as the Javascripts Click Event. An click event attached to the entire window and checks whether the target is contained within the element, or not. if not, it's a outside click. There is also a `exclude` prop taht you can use (continue to learn more).
 
 ### No Wrapper & With Wrapper
-You can visit the demo files [NoWrapper demo](src/NoWrapper.svelte) / [WithWrapper demo](src/WithWrapper.svelte) to learn how to use the component.
+You can visit the demo files [NoWrapper demo](https://github.com/babakfp/svelte-click-outside-demo/blob/main/src/NoWrapper.svelte) / [WithWrapper demo](https://github.com/babakfp/svelte-click-outside-demo/blob/main/src/WithWrapper.svelte) to learn how to use the component.
 
 #### With Wrapper
 element/elements inside the component tags going to be wrapped inside a div element. You can style it by a `class` prop.
@@ -33,7 +33,7 @@ Also you need to have a parent element to wrap the component inside it, to be ab
 </style>
 ```
 
-In [NoWrapper demo](src/NoWrapper.svelte) we use a value calleed `contents` for CSS `display` property (`display: contents`). In [WithWrapper demo](src/WithWrapper.svelte) we don't use that CSS property.
+In [NoWrapper demo](https://github.com/babakfp/svelte-click-outside-demo/blob/main/src/NoWrapper.svelte) we use a value calleed `contents` for CSS `display` property (`display: contents`). In [WithWrapper demo](https://github.com/babakfp/svelte-click-outside-demo/blob/main/src/WithWrapper.svelte) we don't use that CSS property.
 
 ### Props
 
@@ -47,9 +47,10 @@ same as the CSS `class` property, it's for the wrapper class. You don't need to 
 If it was equal to `true`, the component wrapper `<div><slot /></div>` going to be ignored by the browser because of the `display: contents`. It's only ignored by the CSS perspective. For spacial reasons, if you need this wrapper, look at the "With Wrapper" explanation.
 
 ## Install demo
+Visit the demo project repo [here](https://github.com/babakfp/svelte-click-outside-demo).
 ```
-git clone https://github.com/babakfp/svelte-click-outside.git
-cd svelte-click-outside
+git clone https://github.com/babakfp/svelte-click-outside-demo.git
+cd svelte-click-outside-demo
 pnpm i
 pnpm dev
 ```
