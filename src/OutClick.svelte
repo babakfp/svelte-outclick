@@ -35,7 +35,7 @@
 			! wrapper.contains(event.target) &&
 			! isClickedOnExcluded(event.target)
 		) {
-			dispatch('clickOutside')
+			dispatch('outclick')
 		}
 	}
 </script>
