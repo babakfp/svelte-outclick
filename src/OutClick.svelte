@@ -12,6 +12,10 @@
 	
 	// Using CSS `display: contents` to somehow ignore the wrapper element.
 	export let disableWrapper = true
+
+	// If true, wrapper(self) can contain event target.
+	// You can use it to close the menu when clicked on the menu itself.
+	export let dontExcludeSelf = false
 	
 	// DOM element that wraps all stuff that goes inside the component slot.
 	let wrapper
@@ -32,7 +36,7 @@
 
 	const onWindowClick = event => {
 		if (
-			! wrapper.contains(event.target) &&
+			(dontExcludeSelf ? true : ! wrapper.contains(event.target)) &&
 			! isClickedOnExcluded(event.target)
 		) {
 			dispatch('outclick')

@@ -46,6 +46,9 @@ same as the CSS `class` property, it's for the wrapper class. You don't need to 
 #### disableWrapper (default: `true`)
 If it was equal to `true`, the component wrapper `<div><slot /></div>` going to be ignored by the browser because of the `display: contents`. It's only ignored by the CSS perspective. For spacial reasons, if you need this wrapper, look at the "With Wrapper" explanation.
 
+### dontExcludeSelf (default: `false`)
+If true, wrapper(self) can contain event target. You can use it to close the menu when clicked on the menu itself.
+
 ## Install demo
 [Demo repo](https://github.com/babakfp/svelte-outclick-demo)
 ```
