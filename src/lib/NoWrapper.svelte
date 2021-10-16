@@ -1,5 +1,5 @@
 <script>
-	import ClickOutside from 'svelte-click-outside'
+	import OutClick from 'svelte-outclick'
 
 	let excluded
 	let count = 0
@@ -8,9 +8,9 @@
 <div class="other-content" bind:this={excluded}>Excluded</div>
 <div class="other-content">Not excluded</div>
 
-<ClickOutside on:clickOutside={_=> count++} exclude={[excluded]}>
+<OutClick on:outclick={_=> count++} exclude={[excluded]}>
 	<div class="component-content">Component content</div>
-</ClickOutside>
+</OutClick>
 
 <p>Count Click Outside: {count}</p>
 
