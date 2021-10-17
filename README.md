@@ -25,12 +25,12 @@ Must be installed in 'devDependencies'.
 <OutClick on:outclick={myFunction}</OutClick>
 ```
 
-- [DEMO - **Simple**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/Simple.svelte)
-- [DEMO - **No wrapper**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/NoWrapper.svelte)
-- [DEMO - **Excluded element**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/ExcludedElement.svelte)
-- [DEMO - **Include self**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/IncludeSelf.svelte)
-- [DEMO - **Use wrapper**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/UseWrapper.svelte)
-- [DEMO - **Wrapper custom class**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/WrapperClass.svelte)
+- [DEMO - **Simple**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/Simple.svelte)
+- [DEMO - **No wrapper**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/NoWrapper.svelte)
+- [DEMO - **Excluded element**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/ExcludedElement.svelte)
+- [DEMO - **Include self**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/IncludeSelf.svelte)
+- [DEMO - **Use wrapper**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/UseWrapper.svelte)
+- [DEMO - **Wrapper custom class**](https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/WrapperClass.svelte)
 
 ## How it works
 It works the same as Javascript click event. A click event is attached to the entire window and checks whether the event target is contained within the element.
