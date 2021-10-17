@@ -3,19 +3,19 @@
 	const dispatch = createEventDispatcher()
 
 	// DOM elements that get excluded from the event target.
-	let excludedElements = []
-	export { excludedElements as exclude }
+	let excludeds = []
+	export { excludeds as exclude }
 
 	// A real class name attr as prop.
-	let className
+	let className = ''
 	export { className as class }
-	
+
 	// Using CSS `display: contents` to somehow ignore the wrapper element.
-	export let disableWrapper = true
+	export let useWrapper = false
 
 	// If true, wrapper(self) can contain event target.
 	// You can use it to close the menu when clicked on the menu itself.
-	export let dontExcludeSelf = false
+	export let includeSelf = false
 	
 	// DOM element that wraps all stuff that goes inside the component slot.
 	let wrapper
@@ -24,8 +24,8 @@
 	const isClickedOnExcluded = eventTarget => {
 		let status = false
 
-		for (let i = 0; i < excludedElements.length; i++) {
-			if ( excludedElements[i].contains(eventTarget) ) {
+		for (let i = 0; i < excludeds.length; i++) {
+			if ( excludeds[i].contains(eventTarget) ) {
 				status = true
 				break
 			}
@@ -34,23 +34,25 @@
 		return status
 	}
 
-	const onWindowClick = event => {
+	const windowClick = event => {
 		if (
-			(dontExcludeSelf ? true : ! wrapper.contains(event.target)) &&
+			(includeSelf ? true : ! wrapper.contains(event.target)) &&
 			! isClickedOnExcluded(event.target)
 		) {
-			dispatch('outclick')
+			dispatch('outclick', {
+				self: wrapper,
+			})
 		}
 	}
 </script>
 
 <!-- We have this to capture the window on click event. -->
-<svelte:window on:click={onWindowClick} />
+<svelte:window on:click={windowClick} />
 
 <div
 	bind:this={wrapper}
-	class={className}
-	style={disableWrapper && 'display: contents'}
+	class="outclick-wrapper {className}"
+	style={useWrapper ? '' : 'display: contents'}
 >
 	<slot />
 </div>

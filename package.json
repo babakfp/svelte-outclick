@@ -1,7 +1,7 @@
 {
-  "name": "svelte-outclick",
+	"name": "svelte-outclick",
 	"description": "A SvelteJS component that allows you to listen for clicks outside of an element.",
-  "version": "2.0.0",
+	"version": "2.2.0",
 	"license": "MIT",
 	"svelte": "src/OutClick.svelte"
 }
