@@ -16,6 +16,14 @@ pnpm add -D svelte-outclick
 ```
 Must be installed in 'devDependencies'.
 
+### Update
+```
+npm update svelte-outclick
+
+yarn upgrade svelte-outclick
+pnpm up svelte-outclick
+```
+
 ## How to use
 ```HTML
 <script>
