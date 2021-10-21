@@ -52,7 +52,11 @@ If the element didn't contain the event target, it means that the click happened
 - `class` - default: `''`
 
 #### `exclude` - default: `[]`
-By default, clicking on any element outside of the wrapper will cause the event to trigger. You can specify elements that will not trigger the event. For example, a button that triggers a popup must be excluded. Otherwise, it will immediately close the popup when it is opened. The `exclude` prop expects an array of DOM nodes. Clicks on those nodes (and their children) will be ignored.
+By default, clicking on any element outside of the wrapper will cause the event to trigger. You can specify the HTML `class` and `id` of the elements that will not trigger the event. For example, a button that triggers a popup must be excluded. Otherwise, it will immediately close the popup when it is opened. The `exclude` prop expects an array of DOM nodes. Clicks on those nodes (and their children) will be ignored.
+```
+<button class="my-button"></button>
+<OutClick exclude={['.my-button']} />
+```
 
 #### `includeSelf` - default: `false`
 For example, if you want to close the dropdown when you click on its items, set the prop value to `true`, so the self(wrapper) can trigger the event.

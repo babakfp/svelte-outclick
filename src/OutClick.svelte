@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte'
 	const dispatch = createEventDispatcher()
 
-	// DOM elements that get excluded from the event target.
+	// Accepts HTML `class` and `id` of elements that get excluded from the event target.
 	let excludeds = []
 	export { excludeds as exclude }
 
@@ -25,7 +25,8 @@
 		let status = false
 
 		for (let i = 0; i < excludeds.length; i++) {
-			if ( excludeds[i].contains(eventTarget) ) {
+			let el = document.querySelector(excludeds[i])
+			if ( el && el.contains(eventTarget) ) {
 				status = true
 				break
 			}
