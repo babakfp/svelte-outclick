@@ -40,7 +40,7 @@
 			! isClickedOnExcluded(event.target)
 		) {
 			dispatch('outclick', {
-				self: wrapper,
+				wrapper,
 			})
 		}
 	}
