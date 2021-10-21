@@ -1,14 +1,12 @@
 <script>
 	import OutClick from 'svelte-outclick'
-
-	let excluded
 	let count = 0
 </script>
 
-<div class="other-content" bind:this={excluded}>Excluded</div>
+<button class="other-content my-button">Excluded</button>
 <div class="other-content">Not excluded</div>
 
-<OutClick on:outclick={_=> count++} exclude={[excluded]} includeSelf={true}>
+<OutClick on:outclick={_=> count++} exclude={['.my-button']} includeSelf={true}>
 	<div class="component-content">Component content</div>
 </OutClick>
 

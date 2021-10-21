@@ -1,6 +1,5 @@
 <script>
 	import OutClick from 'svelte-outclick'
-
 	let count = 0
 </script>
 
