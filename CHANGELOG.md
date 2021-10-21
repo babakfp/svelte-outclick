@@ -1,4 +1,4 @@
-### 2.4.2
+### 2.4.3
 - The `exclude` prop now accepts HTML `class` and `id` instead of DOM nodes.
 
 ### 2.3.1
