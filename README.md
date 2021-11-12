@@ -54,7 +54,7 @@ If the element didn't contain the event target, it means that the click happened
 
 #### `exclude` - default: `[]` - [**Example**][example__excluded-element]
 By default, clicking on any element outside of the wrapper will cause the event to trigger. You can specify the HTML `class` and `id` of the elements that will not trigger the event. For example, a button that triggers a popup must be excluded. Otherwise, it will immediately close the popup when it is opened. The `exclude` prop expects an array of DOM nodes. Clicks on those nodes (and their children) will be ignored.
-```
+```HTML
 <button class="my-button"></button>
 <OutClick exclude={['.my-button']} />
 ```
