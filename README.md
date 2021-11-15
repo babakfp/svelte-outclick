@@ -1,6 +1,6 @@
-This is the demo repo for the [Svelte Click Outside](https://github.com/babakfp/svelte-outclick) project.
+This is the demo repo for the [Svelte `on:outclick`](https://github.com/babakfp/svelte-outclick) project.
 
-## Install demo
+## Installation
 ```
 git clone https://github.com/babakfp/svelte-outclick-demo.git
 cd svelte-outclick-demo
