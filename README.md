@@ -35,7 +35,7 @@ If the element didn't contain the event target, it means that the click happened
 	import OutClick from 'svelte-outclick'
 </script>
 
-<OutClick on:outclick={myFunction}</OutClick>
+<OutClick on:outclick={myFunction} />
 ```
 
 ### Examples
