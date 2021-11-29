@@ -29,6 +29,8 @@ It works the same as Javascript click event. A click event is attached to the en
 
 If the element didn't contain the event target, it means that the click happened outside of the element. Therefore we can call it outside click (outclick in short).
 
+IMPORTANT: This component uses `on:mousedown` instead of `on:click` because of [**#4**](https://github.com/babakfp/svelte-outclick/issues/4).
+
 ## How to use
 ```HTML
 <script>
