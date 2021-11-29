@@ -48,7 +48,7 @@
 </script>
 
 <!-- We have this to capture the window on click event. -->
-<svelte:window on:click={handleClick} />
+<svelte:window on:mousedown={handleClick} />
 
 <div
 	bind:this={wrapper}
