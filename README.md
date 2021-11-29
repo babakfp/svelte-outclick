@@ -1,4 +1,4 @@
-**V2.4.3** . [**REPO**][repo] . [**DEMO**][demo] . [**NPM**][npm]
+**V2.5.4** . [**REPO**][repo] . [**DEMO**][demo] . [**NPM**][npm]
 
 **In short `on:outclick`** 😜. A Svelte component that allows you to listen for clicks outside of an element, by providing you an outclick event.
 
