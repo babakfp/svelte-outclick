@@ -1,4 +1,4 @@
-**V2.5.4** . [**REPO**][repo] . [**DEMO**][demo] . [**NPM**][npm]
+**V2.5.4** . [**REPO**][repo] . [**DEMO**][demo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
 
 **In short `on:outclick`** 😜. A Svelte component that allows you to listen for clicks outside of an element, by providing you an outclick event.
 
@@ -91,6 +91,7 @@ If you are going to add the wrapper styles in the same Svelte file, you must wra
 [repo]: https://github.com/babakfp/svelte-outclick
 [demo]: https://github.com/babakfp/svelte-outclick-demo
 [npm]: https://www.npmjs.com/package/svelte-outclick
+[changelog]: https://github.com/babakfp/svelte-outclick/blob/main/CHANGELOG.md
 
 [example__simple]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/Simple.svelte
 [example__no-wrapper]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/NoWrapper.svelte
