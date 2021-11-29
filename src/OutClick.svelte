@@ -35,7 +35,7 @@
 		return status
 	}
 
-	const windowClick = event => {
+	const handleClick = event => {
 		if (
 			(includeSelf ? true : ! wrapper.contains(event.target)) &&
 			! isClickedOnExcluded(event.target)
@@ -48,7 +48,7 @@
 </script>
 
 <!-- We have this to capture the window on click event. -->
-<svelte:window on:click={windowClick} />
+<svelte:window on:click={handleClick} />
 
 <div
 	bind:this={wrapper}
