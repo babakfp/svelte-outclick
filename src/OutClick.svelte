@@ -45,10 +45,16 @@
 			})
 		}
 	}
+
+	const handleKeyPress = event => {
+		if(event.key === 'Enter') {
+			handleClick(event)
+		}
+	}
 </script>
 
 <!-- We have this to capture the window on click event. -->
-<svelte:window on:mousedown={handleClick} />
+<svelte:window on:mousedown={handleClick} on:keypress={handleKeyPress}/>
 
 <div
 	bind:this={wrapper}
