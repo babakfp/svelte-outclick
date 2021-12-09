@@ -1,3 +1,7 @@
+### 2.6.5
+- Added `useMousedown` and `useKeydown` props.
+- Fixed [**#4**](https://github.com/babakfp/svelte-outclick/issues/4)
+
 ### 2.5.4
 - Replaced on:click with on:mousedown - fixed #4
 
