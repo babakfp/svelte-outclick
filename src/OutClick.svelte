@@ -17,7 +17,7 @@
 	// You can use it to close the menu when clicked on the menu itself.
 	export let includeSelf = false
 
-	// Whatever to use these instead of a click event
+	// Whether to use `mousedown` and `keydown` events instead of the click event to determine the `outclick` event or not.
 	export let useMousedown = false
 	export let useKeydown = false
 	
