@@ -29,7 +29,7 @@ It works the same as Javascript click event. A click event is attached to the en
 
 If the element didn't contain the event target, it means that the click happened outside of the element. Therefore we can call it outside click (outclick in short).
 
-IMPORTANT: This component uses `on:mousedown` instead of `on:click` because of [**#4**](https://github.com/babakfp/svelte-outclick/issues/4).
+You can you `on:mousedown` instead of `on:click`, it's optional.
 
 ## How to use
 ```HTML
@@ -53,6 +53,8 @@ IMPORTANT: This component uses `on:mousedown` instead of `on:click` because of [
 - `includeSelf` - default: `false`
 - `useWrapper` - default: `false`
 - `class` - default: `''`
+- `useMousedown` - default: `false`
+- `useKeydown` - default: `false`
 
 #### `exclude` - default: `[]` - [**Example**][example__excluded-element]
 By default, clicking on any element outside of the wrapper will cause the event to trigger. You can specify the HTML `class` and `id` of the elements that will not trigger the event. For example, a button that triggers a popup must be excluded. Otherwise, it will immediately close the popup when it is opened. The `exclude` prop expects an array of DOM nodes. Clicks on those nodes (and their children) will be ignored.
@@ -87,6 +89,17 @@ If you are going to add the wrapper styles in the same Svelte file, you must wra
 	section :global(.outclick-wrapper) {}
 </style>
 ```
+
+#### `useMousedown` and `useKeydown` - default: `false`
+```Svelte
+<!-- We have this to capture the window on click|mousedown|keydown event. -->
+<svelte:window
+	on:click={event => !useMousedown && handleClick(event)}
+	on:mousedown={event => useMousedown && handleClick(event)}
+	on:keydown={handleKeydown}
+/>
+```
+Also read this [**#4**](https://github.com/babakfp/svelte-outclick/issues/4).
 
 [repo]: https://github.com/babakfp/svelte-outclick
 [demo]: https://github.com/babakfp/svelte-outclick-demo

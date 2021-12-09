@@ -16,6 +16,10 @@
 	// If true, wrapper(self) can contain event target.
 	// You can use it to close the menu when clicked on the menu itself.
 	export let includeSelf = false
+
+	// Whatever to use these instead of a click event
+	export let useMousedown = false
+	export let useKeydown = false
 	
 	// DOM element that wraps all stuff that goes inside the component slot.
 	let wrapper
@@ -45,10 +49,26 @@
 			})
 		}
 	}
+
+	const handleKeydown = event => {
+		if ( useMousedown && useKeydown ) {
+			if (
+				event.code === 'Enter' &&
+				event.code === 'NumpadEnter' &&
+				event.code === 'Space'
+			) {
+				handleClick(event)
+			}
+		}
+	}
 </script>
 
-<!-- We have this to capture the window on click event. -->
-<svelte:window on:mousedown={handleClick} />
+<!-- We have this to capture the window on click|mousedown|keydown event. -->
+<svelte:window
+	on:click={event => !useMousedown && handleClick(event)}
+	on:mousedown={event => useMousedown && handleClick(event)}
+	on:keydown={event => handleKeydown(event)}
+/>
 
 <div
 	bind:this={wrapper}
