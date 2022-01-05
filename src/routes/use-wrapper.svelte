@@ -21,6 +21,7 @@
 
 <style lang="postcss">
 	div :global(.outclick) {
-		@apply content content--component;
+		@apply flex items-center justify-center w-full h-20 border-2 border-gray-500 border-dashed uppercase;
+		@apply border-svelte border-opacity-80;
 	}
 </style>
