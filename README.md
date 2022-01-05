@@ -14,7 +14,7 @@ Why choose this one over the other packages?
 - [You can trigger the event on component itself](#includeself---default-false---demo---code)
 
 ## Install
-Please check out the [**CHANGELOG**][changelog] before updating to a new version.
+Please check out the [**CHANGELOG**][changelog] before updating to a new version. Restart your app after the update.
 ```
 pnpm add -D svelte-outclick
 ```
