@@ -1,4 +1,4 @@
-**Restart your app after update.**
+Restart your app after the update.
 
 ---
 
