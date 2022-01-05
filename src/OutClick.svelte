@@ -2,34 +2,36 @@
 	import { createEventDispatcher } from 'svelte'
 	const dispatch = createEventDispatcher()
 
-	// Accepts HTML `class` and `id` of elements that get excluded from the event target.
-	let excludeds = []
-	export { excludeds as exclude }
-
-	// A real class name attr as prop.
+	// To use it as HTML `class` attr
 	let className = ''
 	export { className as class }
 
-	// Using CSS `display: contents` to somehow ignore the wrapper element.
+	// Some DOM elements to exclude them from triggering the `outclick` event
+	export let excludeByDOMNode = []
+	export let excludeByQuerySelector = []
+
+	// Whether to not use CSS `display: contents` to ignore the wrapper element or not
 	export let useWrapper = false
 
-	// If true, wrapper(self) can contain event target.
-	// You can use it to close the menu when clicked on the menu itself.
+	// Whether the component content can contain the event's target or not
 	export let includeSelf = false
 
-	// Whether to use `mousedown` and `keydown` events instead of the click event to determine the `outclick` event or not.
-	export let useMousedown = false
-	export let useKeydown = false
-	
-	// DOM element that wraps all stuff that goes inside the component slot.
+	// DOM element that wraps all stuff that goes inside the component's <slot />
 	let wrapper
 
-	// Whether the excluded elements contain the event target or not.
+	// Whether the excluded elements contain the event's target or not
 	const isClickedOnExcluded = eventTarget => {
 		let status = false
 
-		for (let i = 0; i < excludeds.length; i++) {
-			let el = document.querySelector(excludeds[i])
+		for (let i = 0; i < excludeByDOMNode.length; i++) {
+			if ( excludeByDOMNode[i] && excludeByDOMNode[i].contains(eventTarget) ) {
+				status = true
+				break
+			}
+		}
+
+		for (let i = 0; i < excludeByQuerySelector.length; i++) {
+			let el = document.querySelector(excludeByQuerySelector[i])
 			if ( el && el.contains(eventTarget) ) {
 				status = true
 				break
@@ -41,39 +43,32 @@
 
 	const handleClick = event => {
 		if (
-			(includeSelf ? true : ! wrapper.contains(event.target)) &&
+			(includeSelf ? true : !wrapper.contains(event.target)) &&
 			! isClickedOnExcluded(event.target)
 		) {
-			dispatch('outclick', {
-				wrapper,
-			})
+			dispatch('outclick', { wrapper })
 		}
 	}
 
 	const handleKeydown = event => {
-		if ( useMousedown && useKeydown ) {
-			if (
-				event.code === 'Enter' &&
-				event.code === 'NumpadEnter' &&
-				event.code === 'Space'
+		if (
+			// With `on:click`, the A11Y `keydown` event doesn't trigger on `document.body`, so we are just duplicating the same behavior here.
+			event.target !== document.body &&
+			// With `on:click`, the A11Y `keydown`, only these keys trigger the event
+			['Enter', 'NumpadEnter', 'Space'].includes(event.code)
 			) {
-				handleClick(event)
-			}
+			handleClick(event)
 		}
 	}
 </script>
 
-<!-- We have this to capture the window on click|mousedown|keydown event. -->
-<svelte:window
-	on:click={event => !useMousedown && handleClick(event)}
-	on:mousedown={event => useMousedown && handleClick(event)}
-	on:keydown={event => handleKeydown(event)}
-/>
+<!-- We have this to capture the window on mousedown and keydown event. -->
+<svelte:window on:mousedown={handleClick} on:keydown={handleKeydown} />
 
 <div
 	bind:this={wrapper}
-	class="outclick-wrapper {className}"
-	style={useWrapper ? '' : 'display: contents'}
+	class="outclick {className}"
+	style={!className && !useWrapper ? 'display: contents' : ''}
 >
 	<slot />
 </div>

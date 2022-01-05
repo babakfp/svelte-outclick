@@ -1,116 +1,114 @@
-**V2.6.5** . [**REPO**][repo] . [**DEMO**][demo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
+`on:outclick`
 
-**In short `on:outclick`** 😜. A Svelte component that allows you to listen for clicks outside of an element, by providing you an outclick event.
+**V3.0.0** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
 
-- Ignore wrapper ([as CSS perspective][css-display-contents]).
-- Exclude other elements so they will not trigger the event.
-- Include self(wrapper) to the event target.
-- Add custom classes to the wrapper.
+---
 
-## Installation
+A Svelte component that allows you to listen to the clicks that happen outside of an element.
+
+Why choose this one over the other packages?
+- [No extra wrapper](#no-extra-wrapper)
+- [Supports `class` prop](#class---default----demo---code)
+- [Exclude elements from triggering the event](#excludebydomnode-and-excludebyqueryselector)
+- It uses `on:mousedown` and `on:keydown` instead of `on:click` to capture the event
+- [You can trigger the event on component itself](#includeself---default-false---demo---code)
+
+## Install
+Please check out the [**CHANGELOG**][changelog] before updating to a new version.
 ```
-npm i -D svelte-outclick
-
-yarn add svelte-outclick --dev
 pnpm add -D svelte-outclick
-```
-Must be installed in 'devDependencies'.
-
-### Update
-```
-npm update svelte-outclick
-
-yarn upgrade svelte-outclick
-pnpm up svelte-outclick
 ```
 
 ## How it works
-It works the same as Javascript click event. A click event is attached to the entire window and checks whether the event target is contained within the element.
+It works the same as the Javascript click event. A click event is attached to the window and it checks whether the event target is contained within the element. If the element didn't contain the event target, it means the click happened outside of the element.
 
-If the element didn't contain the event target, it means that the click happened outside of the element. Therefore we can call it outside click (outclick in short).
-
-You can you `on:mousedown` instead of `on:click`, it's optional.
-
-## How to use
+### Simple Example
 ```HTML
 <script>
 	import OutClick from 'svelte-outclick'
 </script>
 
-<OutClick on:outclick={myFunction} />
+<OutClick on:outclick={myFunction}>...</OutClick>
 ```
 
-### Examples
-- [**Simple**][example__simple]
-- [**No wrapper**][example__no-wrapper]
-- [**Excluded element**][example__excluded-element]
-- [**Include self**][example__include-self]
-- [**Use wrapper**][example__use-wrapper]
-- [**Wrapper custom class**][example__wrapper-custom-class]
+## Examples
+- Main: [**Demo**][example__main__demo] - [**Code**][example__main__code]
+- Exclude By DOM Node: [**Demo**][example__exclude_by_dom_node__demo] - [**Code**][example__exclude_by_dom_node__code]
+- Exclude By Query Selector: [**Demo**][example__main__demo] - [**Code**][example__main__code]
+- Include Self: [**Demo**][example__include_self__demo] - [**Code**][example__include_self__code]
+- Use Wrapper: [**Demo**][example__use_wrapper__demo] - [**Code**][example__use_wrapper__code]
+- `class` Prop: [**Demo**][example__class_prop__demo] - [**Code**][example__class_prop__code]
 
-### Props
-- `exclude` - default: `[]`
-- `includeSelf` - default: `false`
-- `useWrapper` - default: `false`
-- `class` - default: `''`
-- `useMousedown` - default: `false`
-- `useKeydown` - default: `false`
+---
 
-#### `exclude` - default: `[]` - [**Example**][example__excluded-element]
-By default, clicking on any element outside of the wrapper will cause the event to trigger. You can specify the HTML `class` and `id` of the elements that will not trigger the event. For example, a button that triggers a popup must be excluded. Otherwise, it will immediately close the popup when it is opened. The `exclude` prop expects an array of DOM nodes. Clicks on those nodes (and their children) will be ignored.
+## Props
+
+### `excludeByDOMNode` and `excludeByQuerySelector`
+Clicking on any element outside of the component will cause the event to trigger and this can cause issues, for example, a button that triggers a popup must be excluded, otherwise, it will immediately close the popup when it's opened.
+
+### `excludeByDOMNode` - default: `[]` - [**Code**][example__exclude_by_dom_node__code]
+This prop expects an array of DOM nodes. Clicks on those nodes (and their children) will be ignored. Learn about [`bind:this`](https://svelte.dev/tutorial/bind-this).
+
 ```HTML
-<button class="my-button"></button>
-<OutClick exclude={['.my-button']} />
+<script>
+	let btn
+</script>
+
+<button bind:this={btn}>...</button>
+<OutClick excludeByDOMNode={[btn]}>...</OutClick>
 ```
 
-#### `includeSelf` - default: `false` - [**Example**][example__include-self]
-For example, if you want to close the dropdown when you click on its items, set the prop value to `true`, so the self(wrapper) can trigger the event.
+### `excludeByQuerySelector` - default: `[]` - [**Code**][example__main__code]
+This prop expects an array of query selectors. Clicks on those nodes (and their children) will be ignored. Selectors element most be present on the document or it will cause an error.
 
-#### `useWrapper` - default: `false` - [**Example**][example__use-wrapper]
-
-By default, the wrapper is ignored [as CSS perspective][css-display-contents]. For special reasons, if you don't want to use `display: contents`, set the value to `true`.
-
-**You need to do extra work to get the desired result.** Your elements (that goes inside the component tags) going to wrapped between a `div` element. This element has a default class called `outclick-wrapper`. You can also add your custom classes if you are using tools like TailwindCSS. Read "`class` - default: `null`" section for more information about styling the wrapper.
-
-#### `class` - default: `''` - [**Example**][example__wrapper-custom-class]
-This is the same as CSS `class` property. Add your custom styles for the wrapper element. You don't need to use this if `useWrapper` prop **wasn't** equal to `true` (it is by default).
 ```HTML
-<OutClick class="outclick-wrapper my-custom-class" />
+<button class="my-button"}>...</button>
+<OutClick excludeByQuerySelector={['.my-button']}>...</OutClick>
 ```
-The `outclick-wrapper` class is available by default. You don't need to add it yourself.
 
-If you are going to add the wrapper styles in the same Svelte file, you must wrap the `OutClick` component inside another element, so you can do the following code example, so your styles won't be ignored by the Svelte compiler.
+### `includeSelf` - default: `false` - [**Demo**][example__include_self__demo] - [**Code**][example__include_self__code]
+For example, if you want to close the dropdown when you click on its items, set the value to `true`, so the self(wrapper) can trigger the event.
+
+### `useWrapper` - default: `false` - [**Demo**][example__use_wrapper__demo] - [**Code**][example__use_wrapper__code]
+As we already know, your content that goes inside the componetn tags, will be wrapper inside a `<div class="outclick">HERE</div>`.By default, the [wrapper is ignored](#no-extra-wrapper). Set the prop value to `true` to be able to style the wrapper. Please check out the demo source code to learn about how to style the wrapper.
+
+### `class` - default: `''` - [**Demo**][example__class_prop__demo] - [**Code**][example__class_prop__code]
+This is the same as the CSS `class` property. Add your custom classes to the wrapper element. You can use tools like TailwindCSS without any problems, just add your classes how you normally do. The wrapper element have a class named `.outclick` by default. Please check out the demo source code to learn about how to style the wrapper.
+
 ```HTML
-<section>
-	<OutClick class="outclick-wrapper" />
-</section>
-
-<style>
-	section :global(.outclick-wrapper) {}
-</style>
+<OutClick class="my-custom-class my-custom-class my-second-custom-class" />
+<!--  -->
+<OutClick class="bg-gray-800 text-white font-bold" />
 ```
 
-#### `useMousedown` and `useKeydown` - default: `false`
-```Svelte
-<!-- We have this to capture the window on click|mousedown|keydown event. -->
-<svelte:window
-	on:click={event => !useMousedown && handleClick(event)}
-	on:mousedown={event => useMousedown && handleClick(event)}
-	on:keydown={handleKeydown}
-/>
-```
-Also read this [**#4**](https://github.com/babakfp/svelte-outclick/issues/4).
+---
+
+## No extra wrapper
+Actually, there is an HTML `<div>` wrapper, but it doesn't affect anything because of [`display: contents`](https://caniuse.com/css-display-contents).
+
+## Why `on:mousedown` instead of `on:click`?
+See this [issue #4](https://github.com/babakfp/svelte-outclick/issues/4).
+
+## Extra info
+- `keydown` on `document.body` is ignored, because this is how it works with `on:click`'s `keydown`.
+- `keydown` only triggers with these keys `['Enter', 'NumpadEnter', 'Space']`.
 
 [repo]: https://github.com/babakfp/svelte-outclick
-[demo]: https://github.com/babakfp/svelte-outclick-demo
+[demo]: https://svelte-outclick.vercel.app
 [npm]: https://www.npmjs.com/package/svelte-outclick
-[changelog]: https://github.com/babakfp/svelte-outclick/blob/main/CHANGELOG.md
+[changelog]: CHANGELOG.md
 
-[example__simple]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/Simple.svelte
-[example__no-wrapper]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/NoWrapper.svelte
-[example__excluded-element]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/ExcludedElement.svelte
-[example__include-self]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/IncludeSelf.svelte
-[example__use-wrapper]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/UseWrapper.svelte
-[example__wrapper-custom-class]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/lib/WrapperClass.svelte
+[example__main__demo]: https://svelte-outclick.vercel.app
+[example__main__code]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/routes/index.svelte
 
-[css-display-contents]: https://caniuse.com/css-display-contents
+[example__include_self__demo]: https://svelte-outclick.vercel.app/include-self
+[example__include_self__code]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/routes/include-self.svelte
+
+[example__exclude_by_dom_node__demo]: https://svelte-outclick.vercel.app/exclude-by-dom-node
+[example__exclude_by_dom_node__code]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/routes/exclude-by-dom-node.svelte
+
+[example__use_wrapper__demo]: https://svelte-outclick.vercel.app/use-wrapper
+[example__use_wrapper__code]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/routes/use-wrapper.svelte
+
+[example__class_prop__demo]: https://svelte-outclick.vercel.app/class-prop
+[example__class_prop__code]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/routes/class-prop.svelte

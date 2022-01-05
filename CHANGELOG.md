@@ -1,3 +1,10 @@
+### 3.0.0
+- Remplaced `exclude` prop with `excludeByDOMNode` and `excludeByQuerySelector`.
+- Renamed `.outclick-wrapper` component wrapper class to `.outclick`.
+- Using `on:mousedown` and `on:keydown` instead of `on:click`.
+- Removed `useMousedown` and `useKeydown` props.
+- If you use `class` prop, `display: contents` will be removed by default.
+
 ### 2.6.5
 - Added `useMousedown` and `useKeydown` props.
 - Fixed [**#4**](https://github.com/babakfp/svelte-outclick/issues/4)
