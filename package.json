@@ -9,8 +9,8 @@
     "preview": "svelte-kit preview"
   },
   "devDependencies": {
-    "@sveltejs/adapter-vercel": "next",
-    "@sveltejs/kit": "next",
+    "@sveltejs/adapter-vercel": "1.0.0-next.46",
+    "@sveltejs/kit": "1.0.0-next.295",
     "autoprefixer": "^10.4.1",
     "postcss": "^8.4.5",
     "svelte": "^3.44.3",
