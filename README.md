@@ -1,6 +1,6 @@
 `on:outclick`
 
-**V3.0.0** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
+**v3.0.1** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
 
 ---
 
@@ -10,7 +10,7 @@ Why choose this one over the other packages?
 - [No extra wrapper](#no-extra-wrapper)
 - [Supports `class` prop](#class---default----demo---code)
 - [Exclude elements from triggering the event](#excludebydomnode-and-excludebyqueryselector)
-- It uses `on:mousedown` and `on:keydown` instead of `on:click` to capture the event
+- [It uses `on:mousedown` and `on:keydown` instead of `on:click` to capture the event](#why-onmousedown-and-onkeydown-instead-of-onclick)
 - [You can trigger the event on component itself](#includeself---default-false---demo---code)
 
 ## Install
@@ -76,8 +76,7 @@ As we already know, your content that goes inside the componetn tags, will be wr
 This is the same as the CSS `class` property. Add your custom classes to the wrapper element. You can use tools like TailwindCSS without any problems, just add your classes how you normally do. The wrapper element have a class named `.outclick` by default. Please check out the demo source code to learn about how to style the wrapper.
 
 ```HTML
-<OutClick class="my-custom-class my-custom-class my-second-custom-class" />
-<!--  -->
+<OutClick class="custom-class custom-class-two" />
 <OutClick class="bg-gray-800 text-white font-bold" />
 ```
 
@@ -86,12 +85,17 @@ This is the same as the CSS `class` property. Add your custom classes to the wra
 ## No extra wrapper
 Actually, there is an HTML `<div>` wrapper, but it doesn't affect anything because of [`display: contents`](https://caniuse.com/css-display-contents).
 
-## Why `on:mousedown` instead of `on:click`?
+## Why `on:mousedown` and `on:keydown` instead of `on:click`?
+
 See this [issue #4](https://github.com/babakfp/svelte-outclick/issues/4).
 
-## Extra info
-- `keydown` on `document.body` is ignored, because this is how it works with `on:click`'s `keydown`.
-- `keydown` only triggers with these keys `['Enter', 'NumpadEnter', 'Space']`.
+Also read:
+
+- `keydown` event on `document.body` is ignored because this is how it works when you use `click` event instead of `mousedown` event.
+- `keydown` event only triggers with `Enter`, `NumpadEnter`, and `Space` keys (because this is how it works when you use `click` event instead of `mousedown` event).
+
+## RoadMap
+- Maybe add Typescript support
 
 [repo]: https://github.com/babakfp/svelte-outclick
 [demo]: https://svelte-outclick.vercel.app

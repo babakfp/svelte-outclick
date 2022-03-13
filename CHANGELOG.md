@@ -2,6 +2,11 @@ Restart your app after the update.
 
 ---
 
+## 3.0.1
+- Removed ROADMAP.todo
+- Fixed some typo in README.md
+- Rewrite some description in README.md
+
 ## 3.0.0
 - Remplaced `exclude` prop with `excludeByDOMNode` and `excludeByQuerySelector`.
 - Renamed `.outclick-wrapper` component wrapper class to `.outclick`.
