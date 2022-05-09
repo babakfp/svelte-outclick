@@ -2,6 +2,9 @@ Restart your app after the update.
 
 ---
 
+## 3.1.0
+- Changed `on:mousedown` to `on:pointerdown` and [fixed #8](https://github.com/babakfp/svelte-outclick/issues/6)
+
 ## 3.0.1
 - Removed ROADMAP.todo
 - Fixed some typo in README.md

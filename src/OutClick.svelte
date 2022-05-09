@@ -62,8 +62,8 @@
 	}
 </script>
 
-<!-- We have this to capture the window on mousedown and keydown event. -->
-<svelte:window on:mousedown={handleClick} on:keydown={handleKeydown} />
+<!-- We have this to capture the window on pointerdown and keydown event. -->
+<svelte:window on:pointerdown={handleClick} on:keydown={handleKeydown} />
 
 <div
 	bind:this={wrapper}

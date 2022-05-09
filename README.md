@@ -1,6 +1,6 @@
 `on:outclick`
 
-**v3.0.1** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
+**v3.1.0** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
 
 ---
 
@@ -10,7 +10,7 @@ Why choose this one over the other packages?
 - [No extra wrapper](#no-extra-wrapper)
 - [Supports `class` prop](#class---default----demo---code)
 - [Exclude elements from triggering the event](#excludebydomnode-and-excludebyqueryselector)
-- [It uses `on:mousedown` and `on:keydown` instead of `on:click` to capture the event](#why-onmousedown-and-onkeydown-instead-of-onclick)
+- [It uses `on:pointerdown` and `on:keydown` instead of `on:click` to capture the event](#why-onpointerdown-instead-of-onclick-and-onmousedown)
 - [You can trigger the event on component itself](#includeself---default-false---demo---code)
 
 ## Install
@@ -85,14 +85,14 @@ This is the same as the CSS `class` property. Add your custom classes to the wra
 ## No extra wrapper
 Actually, there is an HTML `<div>` wrapper, but it doesn't affect anything because of [`display: contents`](https://caniuse.com/css-display-contents).
 
-## Why `on:mousedown` and `on:keydown` instead of `on:click`?
+## Why `on:pointerdown` instead of `on:click` and `on:mousedown`?
 
-See this [issue #4](https://github.com/babakfp/svelte-outclick/issues/4).
+At first, we were using the `on:click` event to capture the `outclick` action,  but later because of [this issue](https://github.com/babakfp/svelte-outclick/issues/4) we started using the `on:mousedown` event instead; and later because of [this issue](https://github.com/babakfp/svelte-outclick/issues/6) we started using the `on:pointerdown` even instead.
 
-Also read:
+## Also read
 
-- `keydown` event on `document.body` is ignored because this is how it works when you use `click` event instead of `mousedown` event.
-- `keydown` event only triggers with `Enter`, `NumpadEnter`, and `Space` keys (because this is how it works when you use `click` event instead of `mousedown` event).
+- `keydown` event on `document.body` is ignored because this is how it works when you use `click` event instead of `pointerdown` event.
+- `keydown` event only triggers with `Enter`, `NumpadEnter`, and `Space` keys (because this is how it works when you use `click` event instead of `pointerdown` event).
 
 ## RoadMap
 - Maybe add Typescript support
