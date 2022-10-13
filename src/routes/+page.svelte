@@ -1,15 +1,11 @@
 <script>
 	import OutClick from 'svelte-outclick'
-	import Counter from '$lib/Counter.svelte'
-	let count = 0
+	import { count } from '$lib/count.js'
 </script>
-
-<Counter bind:count />
 
 <OutClick
 	class="box-component"
-	fullClick={true}
-	on:outclick={()=> count++}
+	on:outclick={()=> $count++}
 >
 	outclick component
 </OutClick>

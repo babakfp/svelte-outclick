@@ -5,6 +5,7 @@
 	const items = [
 		{ title: 'Home', href: '/' },
 		{ title: 'Exclude element', href: '/exclude-element' },
+		{ title: 'Full click', href: '/full-click' },
 	]
 	let isOpen = false
 	let toggleBtn
@@ -12,7 +13,7 @@
 	beforeNavigate(()=> isOpen = false)
 </script>
 
-<button class="absolute | flex items-center justify-center | w-8 h-8 | bg-gray-800"
+<button class="flex items-center justify-center | w-8 h-8 | bg-gray-800 | duration-150 | hover:bg-gray-700"
 	bind:this={toggleBtn}
 	on:click={_=> isOpen = !isOpen}
 >
@@ -22,12 +23,12 @@
 </button>
 
 <OutClick on:outclick={()=> isOpen = false} excludeByDomNode={[toggleBtn]}>
-	<header class="absolute top-24 w-80 duration-300 origin-top-left {!isOpen && 'scale-0 pointer-events-none opacity-0 invisible'}">
+	<header class="z-20 | absolute top-12 inset-x-0 | duration-300 origin-top | {!isOpen && 'scale-0 | pointer-events-none opacity-0 invisible'}">
 		<nav>
 			<ul>
 				{#each items as item}
 					<li>
-						<a class="block px-4 py-3 bg-gray-800 text-center text-sm duration-150 hover:bg-gray-700" href={item.href}>{item.title}</a>
+						<a class="block | px-4 py-3 | bg-gray-800 | text-center text-sm uppercase | duration-150 | hover:bg-gray-700" href={item.href}>{item.title}</a>
 					</li>
 				{/each}
 			</ul>

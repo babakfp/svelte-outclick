@@ -5,10 +5,8 @@
 
 <OutClick
 	class="box-component"
+	fullClick={true}
 	on:outclick={()=> $count++}
-	excludeByQuerySelector={['.box-excluded']}
 >
 	outclick component
 </OutClick>
-
-<div class="box-excluded">doesn't trigger outclick</div>

@@ -1,8 +1,14 @@
 <script>
   import '../app.postcss'
 	import Menu from '$lib/Menu.svelte'
+	import Counter from '$lib/Counter.svelte'
 </script>
 
-<slot />
+<div class="relative | flex gap-4 justify-between">
+	<Counter />
+	<Menu />
+</div>
 
-<Menu />
+<div class="grid gap-4">
+	<slot />
+</div>
