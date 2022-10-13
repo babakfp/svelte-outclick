@@ -1,6 +1,6 @@
 `on:outclick`
 
-**v3.1.0** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
+**v3.2.0** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
 
 ---
 
