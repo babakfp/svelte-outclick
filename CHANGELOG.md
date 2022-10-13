@@ -2,6 +2,9 @@ Restart your app after the update.
 
 ---
 
+## 3.2.0
+- Removed `useWrapper` prop, because it was unnecessary.
+
 ## 3.1.0
 - Changed `on:mousedown` to `on:pointerdown` and [fixed #8](https://github.com/babakfp/svelte-outclick/issues/6)
 
