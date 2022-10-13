@@ -6,38 +6,36 @@
 
 A Svelte component that allows you to listen to the clicks that happen outside of an element.
 
-Why choose this one over the other packages?
+Why choose this over the other packages?
 - [No extra wrapper](#no-extra-wrapper)
-- [Supports `class` prop](#class---default----demo---code)
+- [Supports `class` prop](#class-prop)
 - [Exclude elements from triggering the event](#excludebydomnode-and-excludebyqueryselector)
-- [It uses `on:pointerdown` and `on:keydown` instead of `on:click` to capture the event](#why-onpointerdown-instead-of-onclick-and-onmousedown)
-- [You can trigger the event on component itself](#includeself---default-false---demo---code)
+- [It uses (`on:pointerdown` + `on:pointerup` or only `on:pointerdown`) and `on:keydown` instead of `on:click` to capture the event](#why-we-are-not-using-the-click-event-to-capture-the-outclick-event)
+- [Full click supoort](#fullclick---default-false)
+- [Trigger the event on component itself](#includeself---default-false)
 
 ## Install
-Please check out the [**CHANGELOG**][changelog] before updating to a new version. Restart your app after the update.
+Please check out the [**CHANGELOG**][changelog] before updating to the newest version. Restart your app after the update.
 ```
 pnpm add -D svelte-outclick
 ```
 
 ## How it works
-It works the same as the Javascript click event. A click event is attached to the window and it checks whether the event target is contained within the element. If the element didn't contain the event target, it means the click happened outside of the element.
+It works the same as the Javascript click event. A few events are attached to the window and it checks whether the event target is contained within the element. If the element didn't contain the event target, it means the click happened outside of the element.
 
 ### Simple Example
-```HTML
+```svelte
 <script>
 	import OutClick from 'svelte-outclick'
+	let count = 0
 </script>
 
-<OutClick on:outclick={myFunction}>...</OutClick>
+<OutClick
+	on:outclick={()=> count++}
+>
+	{count} times clicked outside
+</OutClick>
 ```
-
-## Examples
-- Main: [**Demo**][example__main__demo] - [**Code**][example__main__code]
-- Exclude By DOM Node: [**Demo**][example__exclude_by_dom_node__demo] - [**Code**][example__exclude_by_dom_node__code]
-- Exclude By Query Selector: [**Demo**][example__main__demo] - [**Code**][example__main__code]
-- Include Self: [**Demo**][example__include_self__demo] - [**Code**][example__include_self__code]
-- Use Wrapper: [**Demo**][example__use_wrapper__demo] - [**Code**][example__use_wrapper__code]
-- `class` Prop: [**Demo**][example__class_prop__demo] - [**Code**][example__class_prop__code]
 
 ---
 
@@ -46,50 +44,114 @@ It works the same as the Javascript click event. A click event is attached to th
 ### `excludeByDomNode` and `excludeByQuerySelector`
 Clicking on any element outside of the component will cause the event to trigger and this can cause issues, for example, a button that triggers a popup must be excluded, otherwise, it will immediately close the popup when it's opened.
 
-### `excludeByDomNode` - default: `[]` - [**Code**][example__exclude_by_dom_node__code]
+### `excludeByDomNode` - default: `[]`
 This prop expects an array of DOM nodes. Clicks on those nodes (and their children) will be ignored. Learn about [`bind:this`](https://svelte.dev/tutorial/bind-this).
 
-```HTML
+```svelte
 <script>
-	let btn
+	import OutClick from 'svelte-outclick'
+	let count = 0
+	let thisIsExcluded
 </script>
 
-<button bind:this={btn}>...</button>
-<OutClick excludeByDomNode={[btn]}>...</OutClick>
+<OutClick
+	on:outclick={()=> count++}
+	excludeByDomNode={[thisIsExcluded]}
+>
+	{count} times clicked outside
+</OutClick>
+
+<div bind:this={thisIsExcluded}>
+	this doesn't trigger outclick
+</div>
 ```
 
-### `excludeByQuerySelector` - default: `[]` - [**Code**][example__main__code]
+### `excludeByQuerySelector` - default: `[]`
 This prop expects an array of query selectors. Clicks on those nodes (and their children) will be ignored. Selectors element most be present on the document or it will cause an error.
 
-```HTML
-<button class="my-button"}>...</button>
-<OutClick excludeByQuerySelector={['.my-button']}>...</OutClick>
+```svelte
+<script>
+	import OutClick from 'svelte-outclick'
+	let count = 0
+</script>
+
+<OutClick
+	on:outclick={()=> count++}
+	excludeByQuerySelector={['.this-is-excluded']}
+>
+	{count} times clicked outside
+</OutClick>
+
+<div class="this-is-excluded">
+	this doesn't trigger outclick
+</div>
 ```
 
-### `includeSelf` - default: `false` - [**Demo**][example__include_self__demo] - [**Code**][example__include_self__code]
-For example, if you want to close the dropdown when you click on its items, set the value to `true`, so the self(wrapper) can trigger the event.
-
-### `class` - default: `''` - [**Demo**][example__class_prop__demo] - [**Code**][example__class_prop__code]
+### `class` prop
 This is the same as the CSS `class` attribute. You can use tools like TailwindCSS without any problems, just add your classes how you normally do. Please check out the demo source code to learn about how to add styles to your custom class.
 
-```HTML
-<OutClick class="custom-class custom-class-two" />
-<OutClick class="bg-gray-800 text-white font-bold" />
+```svelte
+<script>
+	import OutClick from 'svelte-outclick'
+	let count = 0
+</script>
+
+<div>
+	<OutClick
+		class="my-custom-class another-class"
+		on:outclick={()=> count++}
+	>
+		{count} times clicked outside
+	</OutClick>
+</div>
+
+<style lang="postcss">
+	/*
+	You need to use :global() here because Svelte sucks.
+	You need to use an extra element(div) to wrap the component inside it,
+		to prevent your styles from affecting the elements outside of this component.
+	*/
+	div :global(.my-custom-class) {
+		color: red;
+	}
+</style>
 ```
+
+### `includeSelf` - default: `false`
+For example, if you want to close the dropdown when you click on its items, set the value to `true`, so the self(wrapper) can trigger the event.
+
+```svelte
+<script>
+	import OutClick from 'svelte-outclick'
+	let count = 0
+</script>
+
+<OutClick
+	on:outclick={()=> count++}
+	includeSelf={true}
+>
+	{count} times clicked outside and inside
+</OutClick>
+```
+
+### `fullClick` - default: `false`
+If `true`, outclick will happen when `pointerdown` and `pointerup` events happen after eachother, outside of the element.
 
 ---
 
 ## No extra wrapper
-Actually, there is an HTML `<div>` wrapper, but it doesn't affect anything because of [`display: contents`](https://caniuse.com/css-display-contents).
+Actually, there is an HTML `<div>` wrapper, but it doesn't affect the layout because of [`display: contents`](https://caniuse.com/css-display-contents). If you use the `class` prop, `display: contents will be removed automatically.
 
-## Why `on:pointerdown` instead of `on:click` and `on:mousedown`?
+## FAQ
 
-At first, we were using the `on:click` event to capture the `outclick` action,  but later because of [this issue](https://github.com/babakfp/svelte-outclick/issues/4) we started using the `on:mousedown` event instead; and later because of [this issue](https://github.com/babakfp/svelte-outclick/issues/6) we started using the `on:pointerdown` even instead.
+### Why we are not using the `click` event to capture the `outclick` event?
 
-## Also read
+At first, we were using the `click` event to capture the `outclick` event,  but later because of [this issue](https://github.com/babakfp/svelte-outclick/issues/4) we started using the `mousedown` event instead; and later because of [this issue](https://github.com/babakfp/svelte-outclick/issues/6) we started using the `pointerdown` even. Later I have added the ability to use `pointerup` event with the `pointerdown` event.
 
-- `keydown` event on `document.body` is ignored because this is how it works when you use `click` event instead of `pointerdown` event.
-- `keydown` event only triggers with `Enter`, `NumpadEnter`, and `Space` keys (because this is how it works when you use `click` event instead of `pointerdown` event).
+### Also read
+
+- `keydown` event on `document.body` is ignored because this is how it works when you use `click` event instead.
+- `keydown` event only triggers with `Enter`, `NumpadEnter`, and `Space` keys (because this is how it works when you use the `click` event instead).
 
 ## RoadMap
 - Maybe add Typescript support
@@ -98,18 +160,3 @@ At first, we were using the `on:click` event to capture the `outclick` action,  
 [demo]: https://svelte-outclick.vercel.app
 [npm]: https://www.npmjs.com/package/svelte-outclick
 [changelog]: CHANGELOG.md
-
-[example__main__demo]: https://svelte-outclick.vercel.app
-[example__main__code]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/routes/index.svelte
-
-[example__include_self__demo]: https://svelte-outclick.vercel.app/include-self
-[example__include_self__code]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/routes/include-self.svelte
-
-[example__exclude_by_dom_node__demo]: https://svelte-outclick.vercel.app/exclude-by-dom-node
-[example__exclude_by_dom_node__code]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/routes/exclude-by-dom-node.svelte
-
-[example__use_wrapper__demo]: https://svelte-outclick.vercel.app/use-wrapper
-[example__use_wrapper__code]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/routes/use-wrapper.svelte
-
-[example__class_prop__demo]: https://svelte-outclick.vercel.app/class-prop
-[example__class_prop__code]: https://github.com/babakfp/svelte-outclick-demo/blob/main/src/routes/class-prop.svelte
