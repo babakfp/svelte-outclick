@@ -6,6 +6,7 @@ Restart your app after the update.
 - [breaking] Removed `useWrapper` prop, because it was unnecessary.
 - [breaking] Removed the default class `outclick` from the component wrapper element.
 - [breaking] Renamed `excludeByDOMNode` to `excludeByDomNode`
+- Added new `fullClick`, now you can capture full click (pointerdown + pointerup) instead of just (pointerdown).
 - Fix empty `class` attribute showing up when not using a class.
 - Fix empty `style` attribute showing up when using the `class` prop.
 
