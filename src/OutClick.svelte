@@ -10,9 +10,6 @@
 	export let excludeByDOMNode = []
 	export let excludeByQuerySelector = []
 
-	// Whether to not use CSS `display: contents` to ignore the wrapper element or not
-	export let useWrapper = false
-
 	// Whether the component content can contain the event's target or not
 	export let includeSelf = false
 
@@ -68,7 +65,7 @@
 <div
 	bind:this={wrapper}
 	class="outclick {className}"
-	style={!className && !useWrapper ? 'display: contents' : ''}
+	style={!className ? 'display: contents' : ''}
 >
 	<slot />
 </div>
