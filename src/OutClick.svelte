@@ -40,8 +40,8 @@
 
 	const handleClick = event => {
 		if (
-			(includeSelf ? true : !wrapper.contains(event.target)) &&
-			! isClickedOnExcluded(event.target)
+			(includeSelf && wrapper.contains(event.target)) ||
+			(!wrapper.contains(event.target) && !isClickedOnExcluded(event.target))
 		) {
 			dispatch('outclick', { wrapper })
 		}
