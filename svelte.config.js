@@ -1,15 +1,17 @@
-import adapter from '@sveltejs/adapter-vercel'
-import sveltePreprocess from 'svelte-preprocess'
+import preprocess from 'svelte-preprocess'
+import adapter from '@sveltejs/adapter-auto'
 
+/** @type {import('@sveltejs/kit').Config} */
 const config = {
-	kit: {
-		adapter: adapter(),
-	},
+  kit: {
+    adapter: adapter(),
+		alias: {
+      $lib: 'src/lib',
+		},
+  },
   preprocess: [
-		sveltePreprocess({
-			postcss: true,
-		})
-	],
+    preprocess({ postcss: true }),
+  ],
 }
 
 export default config

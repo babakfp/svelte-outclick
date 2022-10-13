@@ -7,9 +7,5 @@ node_modules
 .env.*
 !.env.example
 
-.vercel_build_output
-
-.pnpm-debug.log
-pnpm-lock.yaml
-
-src/routes/playground.svelte
+*-lock.*
+*-debug.log
