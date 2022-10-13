@@ -3,7 +3,7 @@
 	const dispatch = createEventDispatcher()
 
 	// To use it as HTML `class` attr
-	let className = ''
+	let className = null
 	export { className as class }
 
 	// Some DOM elements to exclude them from triggering the `outclick` event
@@ -64,7 +64,7 @@
 
 <div
 	bind:this={wrapper}
-	class="outclick {className}"
+	class={className}
 	style={!className ? 'display: contents' : ''}
 >
 	<slot />

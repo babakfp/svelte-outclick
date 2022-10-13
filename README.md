@@ -70,7 +70,7 @@ This prop expects an array of query selectors. Clicks on those nodes (and their 
 For example, if you want to close the dropdown when you click on its items, set the value to `true`, so the self(wrapper) can trigger the event.
 
 ### `class` - default: `''` - [**Demo**][example__class_prop__demo] - [**Code**][example__class_prop__code]
-This is the same as the CSS `class` property. Add your custom classes to the wrapper element. You can use tools like TailwindCSS without any problems, just add your classes how you normally do. The wrapper element have a class named `.outclick` by default. Please check out the demo source code to learn about how to style the wrapper.
+This is the same as the CSS `class` attribute. You can use tools like TailwindCSS without any problems, just add your classes how you normally do. Please check out the demo source code to learn about how to add styles to your custom class.
 
 ```HTML
 <OutClick class="custom-class custom-class-two" />
