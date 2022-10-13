@@ -65,7 +65,7 @@
 <div
 	bind:this={wrapper}
 	class={className}
-	style={!className ? 'display: contents' : ''}
+	style={!className ? 'display: contents' : null}
 >
 	<slot />
 </div>
