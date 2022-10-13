@@ -7,7 +7,7 @@
 	export { className as class }
 
 	// Some DOM elements to exclude them from triggering the `outclick` event
-	export let excludeByDOMNode = []
+	export let excludeByDomNode = []
 	export let excludeByQuerySelector = []
 
 	// Whether the component content can contain the event's target or not
@@ -20,8 +20,8 @@
 	const isClickedOnExcluded = eventTarget => {
 		let status = false
 
-		for (let i = 0; i < excludeByDOMNode.length; i++) {
-			if ( excludeByDOMNode[i] && excludeByDOMNode[i].contains(eventTarget) ) {
+		for (let i = 0; i < excludeByDomNode.length; i++) {
+			if ( excludeByDomNode[i] && excludeByDomNode[i].contains(eventTarget) ) {
 				status = true
 				break
 			}

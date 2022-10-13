@@ -3,8 +3,9 @@ Restart your app after the update.
 ---
 
 ## 3.2.0
-- Removed `useWrapper` prop, because it was unnecessary.
-- Removed the default class `outclick` from the component wrapper element.
+- [breaking] Removed `useWrapper` prop, because it was unnecessary.
+- [breaking] Removed the default class `outclick` from the component wrapper element.
+- [breaking] Renamed `excludeByDOMNode` to `excludeByDomNode`
 - Fix empty `class` attribute showing up when not using a class.
 - Fix empty `style` attribute showing up when using the `class` prop.
 

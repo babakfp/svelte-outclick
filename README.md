@@ -43,10 +43,10 @@ It works the same as the Javascript click event. A click event is attached to th
 
 ## Props
 
-### `excludeByDOMNode` and `excludeByQuerySelector`
+### `excludeByDomNode` and `excludeByQuerySelector`
 Clicking on any element outside of the component will cause the event to trigger and this can cause issues, for example, a button that triggers a popup must be excluded, otherwise, it will immediately close the popup when it's opened.
 
-### `excludeByDOMNode` - default: `[]` - [**Code**][example__exclude_by_dom_node__code]
+### `excludeByDomNode` - default: `[]` - [**Code**][example__exclude_by_dom_node__code]
 This prop expects an array of DOM nodes. Clicks on those nodes (and their children) will be ignored. Learn about [`bind:this`](https://svelte.dev/tutorial/bind-this).
 
 ```HTML
@@ -55,7 +55,7 @@ This prop expects an array of DOM nodes. Clicks on those nodes (and their childr
 </script>
 
 <button bind:this={btn}>...</button>
-<OutClick excludeByDOMNode={[btn]}>...</OutClick>
+<OutClick excludeByDomNode={[btn]}>...</OutClick>
 ```
 
 ### `excludeByQuerySelector` - default: `[]` - [**Code**][example__main__code]
