@@ -13,6 +13,9 @@
 	// Whether the component content can contain the event's target or not
 	export let includeSelf = false
 
+	// Using this to handle full click functionality, simulating the click event without the dragging issue: https://github.com/babakfp/svelte-outclick/issues/4
+	let didPointerdownOut = false
+
 	// DOM element that wraps all stuff that goes inside the component's <slot />
 	let wrapper
 
@@ -38,13 +41,28 @@
 		return status
 	}
 
-	const handleClick = event => {
+	const didOutsideEventHappen = (event) => {
 		if (
 			(includeSelf && wrapper.contains(event.target)) ||
 			(!wrapper.contains(event.target) && !isClickedOnExcluded(event.target))
 		) {
+			return true
+		}
+
+		return false
+	}
+
+	const handlePointerdown = (event) => {
+		if (didOutsideEventHappen(event)) {
+			didPointerdownOut = true
+		}
+	}
+
+	const handlePointerup = (event) => {
+		if (didOutsideEventHappen(event) && didPointerdownOut) {
 			dispatch('outclick', { wrapper })
 		}
+		didPointerdownOut = false
 	}
 
 	const handleKeydown = event => {
@@ -54,13 +72,19 @@
 			// With `on:click`, the A11Y `keydown`, only these keys trigger the event
 			['Enter', 'NumpadEnter', 'Space'].includes(event.code)
 			) {
-			handleClick(event)
+			if (didOutsideEventHappen(event)) {
+				dispatch('outclick', { wrapper })
+			}
 		}
 	}
 </script>
 
 <!-- We have this to capture the window on pointerdown and keydown event. -->
-<svelte:window on:pointerdown={handleClick} on:keydown={handleKeydown} />
+<svelte:window
+	on:pointerdown={handlePointerdown}
+	on:pointerup={handlePointerup}
+	on:keydown={handleKeydown}
+/>
 
 <div
 	bind:this={wrapper}
