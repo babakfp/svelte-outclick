@@ -13,6 +13,9 @@
 	// Whether the component content can contain the event's target or not
 	export let includeSelf = false
 
+	// Should outclick event happen on pointerdown or (pointerdown + pointerup)
+	export let fullClick = false
+
 	// Using this to handle full click functionality, simulating the click event without the dragging issue: https://github.com/babakfp/svelte-outclick/issues/4
 	let didPointerdownOut = false
 
@@ -54,11 +57,16 @@
 
 	const handlePointerdown = (event) => {
 		if (didOutsideEventHappen(event)) {
-			didPointerdownOut = true
+			if (fullClick) {
+				didPointerdownOut = true
+			} else {
+				dispatch('outclick', { wrapper })
+			}
 		}
 	}
 
 	const handlePointerup = (event) => {
+		if (!fullClick) return
 		if (didOutsideEventHappen(event) && didPointerdownOut) {
 			dispatch('outclick', { wrapper })
 		}
