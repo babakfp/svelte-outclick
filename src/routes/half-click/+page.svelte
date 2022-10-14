@@ -5,7 +5,7 @@
 
 <OutClick
 	class="box-component"
-	fullClick={true}
+	fullClick={false}
 	on:outclick={()=> $count++}
 >
 	outclick component

@@ -5,7 +5,7 @@
 	const items = [
 		{ title: 'Home', href: '/' },
 		{ title: 'Exclude element', href: '/exclude-element' },
-		{ title: 'Full click', href: '/full-click' },
+		{ title: 'Half click', href: '/half-click' },
 	]
 	let isOpen = false
 	let toggleBtn
