@@ -14,7 +14,7 @@
 	export let includeSelf = false
 
 	// Should outclick event happen on pointerdown or (pointerdown + pointerup)
-	export let fullClick = false
+	export let fullClick = true
 
 	// Using this to handle full click functionality, simulating the click event without the dragging issue: https://github.com/babakfp/svelte-outclick/issues/4
 	let didPointerdownOut = false

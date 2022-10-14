@@ -134,8 +134,8 @@ For example, if you want to close the dropdown when you click on its items, set 
 </OutClick>
 ```
 
-### `fullClick` - default: `false`
-If `true`, outclick will happen when `pointerdown` and `pointerup` events happen after eachother, outside of the element.
+### `fullClick` - default: `true`
+If `true`, outclick will happen when `pointerdown` and `pointerup` events happen after eachother, outside of the element. If `false`, `pointerdown` can solely determine the click outside.
 
 ---
 
