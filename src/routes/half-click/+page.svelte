@@ -10,3 +10,5 @@
 >
 	outclick component
 </OutClick>
+
+<p class="text-xs">outclick fires on pointerdown.</p>

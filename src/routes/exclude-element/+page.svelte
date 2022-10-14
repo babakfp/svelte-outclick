@@ -12,3 +12,5 @@
 </OutClick>
 
 <div class="box-excluded">doesn't trigger outclick</div>
+
+<p class="text-xs">for example, exclude the button that opens the dropdown.</p>
