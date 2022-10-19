@@ -1,4 +1,4 @@
-Restart your app after the update.
+Restart your app after updating the package.
 
 ---
 
