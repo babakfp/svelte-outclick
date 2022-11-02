@@ -11,7 +11,7 @@ Why choose this over the other packages?
 - [Supports `class` prop](#class-prop)
 - [Exclude elements from triggering the event](#excludebydomnode-and-excludebyqueryselector)
 - [It uses (`on:pointerdown` + `on:pointerup` or only `on:pointerdown`) and `on:keydown` instead of `on:click` to capture the event](#why-we-are-not-using-the-click-event-to-capture-the-outclick-event)
-- [Full click supoort](#fullclick---default-false)
+- [Full click supoort](#fullclick---default-true)
 - [Trigger the event on component itself](#includeself---default-false)
 
 ## Install
