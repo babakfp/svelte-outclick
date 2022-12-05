@@ -1,8 +1,8 @@
 <script>
-	import { createEventDispatcher } from 'svelte'
+	import { createEventDispatcher } from "svelte"
 	const dispatch = createEventDispatcher()
 
-	export let tag = 'div'
+	export let tag = "div"
 
 	// To use it as HTML `class` attr
 	let className = null
@@ -29,7 +29,7 @@
 		let status = false
 
 		for (let i = 0; i < excludeByDomNode.length; i++) {
-			if ( excludeByDomNode[i] && excludeByDomNode[i].contains(eventTarget) ) {
+			if (excludeByDomNode[i] && excludeByDomNode[i].contains(eventTarget)) {
 				status = true
 				break
 			}
@@ -37,7 +37,7 @@
 
 		for (let i = 0; i < excludeByQuerySelector.length; i++) {
 			let el = document.querySelector(excludeByQuerySelector[i])
-			if ( el && el.contains(eventTarget) ) {
+			if (el && el.contains(eventTarget)) {
 				status = true
 				break
 			}
@@ -46,7 +46,7 @@
 		return status
 	}
 
-	const didOutsideEventHappen = (event) => {
+	const didOutsideEventHappen = event => {
 		if (
 			(includeSelf && wrapper.contains(event.target)) ||
 			(!wrapper.contains(event.target) && !isClickedOnExcluded(event.target))
@@ -57,20 +57,20 @@
 		return false
 	}
 
-	const handlePointerdown = (event) => {
+	const handlePointerdown = event => {
 		if (didOutsideEventHappen(event)) {
 			if (fullClick) {
 				didPointerdownOut = true
 			} else {
-				dispatch('outclick', { wrapper })
+				dispatch("outclick", { wrapper })
 			}
 		}
 	}
 
-	const handlePointerup = (event) => {
+	const handlePointerup = event => {
 		if (!fullClick) return
 		if (didOutsideEventHappen(event) && didPointerdownOut) {
-			dispatch('outclick', { wrapper })
+			dispatch("outclick", { wrapper })
 		}
 		didPointerdownOut = false
 	}
@@ -80,10 +80,10 @@
 			// With `on:click`, the A11Y `keydown` event doesn't trigger on `document.body`, so we are just duplicating the same behavior here.
 			event.target !== document.body &&
 			// With `on:click`, the A11Y `keydown`, only these keys trigger the event
-			['Enter', 'NumpadEnter', 'Space'].includes(event.code)
-			) {
+			["Enter", "NumpadEnter", "Space"].includes(event.code)
+		) {
 			if (didOutsideEventHappen(event)) {
-				dispatch('outclick', { wrapper })
+				dispatch("outclick", { wrapper })
 			}
 		}
 	}
@@ -100,7 +100,7 @@
 	this={tag}
 	bind:this={wrapper}
 	class={className}
-	style={!className ? 'display: contents' : null}
+	style={!className ? "display: contents" : null}
 >
 	<slot />
 </svelte:element>
