@@ -2,6 +2,8 @@
 	import { createEventDispatcher } from 'svelte'
 	const dispatch = createEventDispatcher()
 
+	export let tag = 'div'
+
 	// To use it as HTML `class` attr
 	let className = null
 	export { className as class }
@@ -94,10 +96,11 @@
 	on:keydown={handleKeydown}
 />
 
-<div
+<svelte:element
+	this={tag}
 	bind:this={wrapper}
 	class={className}
 	style={!className ? 'display: contents' : null}
 >
 	<slot />
-</div>
+</svelte:element>
