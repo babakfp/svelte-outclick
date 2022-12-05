@@ -150,7 +150,17 @@ If `true`, outclick will happen when `pointerdown` and `pointerup` events happen
 
 ### `tag` - default: `'div'`
 
-You can add a prop called `tag` to `OutClick` and change the component tag.
+You can add a prop called `tag` to `OutClick` and change the component tag. Added with the help of the `svelte:element` feature.
+
+### Custom attributes
+
+Add your desired attribute to the wrapper element:
+
+```
+<OutClick aria-label="Hello" />
+```
+
+Added with the help of the `$$restProps` feature.
 
 ---
 

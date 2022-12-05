@@ -4,7 +4,8 @@ Restart your app after updating the package.
 
 ## 3.3.0
 
-- Added custom tag support. Now you can add a prop called `tag` into your `OutClick` component and change the component tag.
+- Added custom tag support. Now you can add a prop called `tag` into your `OutClick` component and change the component tag. Added with the help of the `svelte:element` feature.
+- Now you can add custom attributes to the component. Added with the help of the `$$restProps` feature.
 
 ## 3.2.0
 

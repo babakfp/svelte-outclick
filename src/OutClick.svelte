@@ -101,6 +101,7 @@
 	bind:this={wrapper}
 	class={className}
 	style={!className ? "display: contents" : null}
+	{...$$restProps}
 >
 	<slot />
 </svelte:element>
