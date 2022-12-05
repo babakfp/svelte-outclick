@@ -1,6 +1,6 @@
 `on:outclick`
 
-**v3.2.0** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
+**v3.3.0** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
 
 ---
 
@@ -147,6 +147,10 @@ For example, if you want to close the dropdown when you click on its items, set 
 ### `fullClick` - default: `true`
 
 If `true`, outclick will happen when `pointerdown` and `pointerup` events happen after eachother, outside of the element. If `false`, `pointerdown` can solely determine the click outside.
+
+### `tag` - default: `'div'`
+
+You can add a prop called `tag` to `OutClick` and change the component tag.
 
 ---
 

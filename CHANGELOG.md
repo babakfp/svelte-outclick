@@ -2,6 +2,10 @@ Restart your app after updating the package.
 
 ---
 
+## 3.3.0
+
+- Added custom tag support. Now you can add a prop called `tag` into your `OutClick` component and change the component tag.
+
 ## 3.2.0
 
 - [breaking] Removed `useWrapper` prop, because it was unnecessary.
