@@ -1,5 +1,6 @@
 {
   "name": "svelte-outclick-demo",
+	"license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
