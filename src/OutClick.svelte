@@ -2,33 +2,60 @@
 	import { createEventDispatcher } from "svelte"
 	const dispatch = createEventDispatcher()
 
-	// Wrapper tag
+	/**
+	 * Wrapper tag
+	 * @type {string}
+	 */
 	export let tag = "div"
 
-	// To use it as HTML `class` attr
+	/**
+	 * To use it as HTML `class` attr
+	 * @type {string | null | undefined}
+	 */
 	let className = null
 	export { className as class }
 
-	// DOM elements to exclude from triggering the `outclick` event
+	/**
+	 * DOM elements to exclude from triggering the `outclick` event
+	 * @type {HTMLElement[] | null | undefined} excludeElements
+	 * @type {string | string[] | null | undefined} excludeQuerySelectorAll
+	 */
 	export let excludeElements = null
 	export let excludeQuerySelectorAll = null
 
 	// Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
 	$: excludeElements = castArray(excludeElements)
 
-	// If the wrapper did contain the event target, allow the `outclick` event to dispatch
+	/**
+	 * If the wrapper did contain the event target, allow the `outclick` event to dispatch
+	 * @type {boolean}
+	 */
 	export let includeSelf = false
 
-	// Should the outclick event happen on (`pointerdown`) or (`pointerdown` + `pointerup`)
+	/**
+	 * Should the outclick event happen on (`pointerdown`) or (`pointerdown` + `pointerup`)
+	 * @type {boolean}
+	 */
 	export let halfClick = false
 
-	// Using to handle full-click functionality. Simulating the core click event without having this issue: https://github.com/babakfp/svelte-outclick/issues/4
+	/**
+	 * Using to handle full-click functionality. Simulating the core click event without having this issue: https://github.com/babakfp/svelte-outclick/issues/4
+	 * @type {boolean}
+	 */
 	let isPointerdownTriggered = false
 
-	// DOM element that wraps everything that goes inside the component slot
+	/**
+	 * DOM element that wraps everything that goes inside the component slot
+	 * @type {HTMLElement}
+	 */
 	let wrapper
 
+	/**
+	 * @param {object} eventTarget
+	 * @returns {boolean}
+	 */
 	const isExcludedElementsContainTheEventTarget = eventTarget => {
+		/** @type {boolean} */
 		let status = false
 
 		for (const element of excludeElements) {
@@ -55,6 +82,10 @@
 		return status
 	}
 
+	/**
+	 * @param {object} eventTarget
+	 * @returns {boolean}
+	 */
 	const isOutsideEventHappen = eventTarget => {
 		if (
 			(includeSelf && wrapper.contains(eventTarget)) ||
@@ -66,6 +97,10 @@
 		return false
 	}
 
+	/**
+	 * @param {PointerEvent} event
+	 * @returns {void}
+	 */
 	const handlePointerdown = event => {
 		if (isOutsideEventHappen(event.target)) {
 			if (halfClick) {
@@ -76,6 +111,10 @@
 		}
 	}
 
+	/**
+	 * @param {PointerEvent} event
+	 * @returns {void}
+	 */
 	const handlePointerup = event => {
 		if (halfClick) return
 		if (isOutsideEventHappen(event.target) && isPointerdownTriggered) {
@@ -84,6 +123,10 @@
 		isPointerdownTriggered = false
 	}
 
+	/**
+	 * @param {KeyboardEvent} event
+	 * @returns {void}
+	 */
 	const handleKeydown = event => {
 		if (
 			// With `on:click`, the A11Y `keydown` event doesn't trigger on `document.body`, so we are just duplicating the same behavior here.
@@ -97,6 +140,10 @@
 		}
 	}
 
+	/**
+	 * @param {any} value
+	 * @returns {any[]}
+	 */
 	function castArray(value) {
 		return Array.isArray(value) ? value : [value]
 	}
