@@ -2,6 +2,10 @@ Restart your app after updating the package.
 
 ---
 
+## 3.3.1
+
+- Fixed JSDocs type
+
 ## 3.3.0
 
 - [breaking] Renamed `fullClick` to `halfClick`. default: `false`

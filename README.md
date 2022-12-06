@@ -1,6 +1,6 @@
 # Svelte OutClick `on:outclick`
 
-**v3.3.0** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
+**v3.3.1** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
 
 ---
 
