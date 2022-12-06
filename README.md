@@ -10,9 +10,9 @@ Why choose this over the other packages?
 
 - [No extra wrapper](#no-extra-wrapper)
 - [Supports `class` prop](#class-prop)
-- [Exclude elements from triggering the event](#excludebydomnode-and-excludebyqueryselector)
+- [Exclude elements from triggering the event](#excludeelements-and-excludequeryselectorall)
 - [It uses (`on:pointerdown` + `on:pointerup` or only `on:pointerdown`) and `on:keydown` instead of `on:click` to capture the event](#why-we-are-not-using-the-click-event-to-capture-the-outclick-event)
-- [Full click supoort](#fullclick---default-true)
+- [Full click supoort](#halfclick---default-true)
 - [Trigger the event on component itself](#includeself---default-false)
 
 ## Install
@@ -46,11 +46,11 @@ It works the same as the Javascript click event. A few events are attached to th
 
 ## Props
 
-### `excludeByDomNode` and `excludeByQuerySelector`
+### `excludeElements` and `excludeQuerySelectorAll`
 
 Clicking on any element outside of the component will cause the event to trigger and this can cause issues, for example, a button that triggers a popup must be excluded, otherwise, it will immediately close the popup when it's opened.
 
-### `excludeByDomNode` - default: `[]`
+### `excludeElements` - default: `[]`
 
 This prop expects an array of DOM nodes. Clicks on those nodes (and their children) will be ignored. Learn about [`bind:this`](https://svelte.dev/tutorial/bind-this).
 
@@ -63,7 +63,7 @@ This prop expects an array of DOM nodes. Clicks on those nodes (and their childr
 
 <OutClick
 	on:outclick={()=> count++}
-	excludeByDomNode={[thisIsExcluded]}
+	excludeElements={[thisIsExcluded]}
 >
 	{count} times clicked outside
 </OutClick>
@@ -73,7 +73,9 @@ This prop expects an array of DOM nodes. Clicks on those nodes (and their childr
 </div>
 ```
 
-### `excludeByQuerySelector` - default: `[]`
+This prop can receive a single variable or multiple variables in an array.
+
+### `excludeQuerySelectorAll` - default: `[]`
 
 This prop expects an array of query selectors. Clicks on those nodes (and their children) will be ignored. Selectors element most be present on the document or it will cause an error.
 
@@ -85,7 +87,7 @@ This prop expects an array of query selectors. Clicks on those nodes (and their 
 
 <OutClick
 	on:outclick={()=> count++}
-	excludeByQuerySelector={['.this-is-excluded']}
+	excludeQuerySelectorAll={['.this-is-excluded']}
 >
 	{count} times clicked outside
 </OutClick>
@@ -94,6 +96,8 @@ This prop expects an array of query selectors. Clicks on those nodes (and their 
 	this doesn't trigger outclick
 </div>
 ```
+
+This prop works the same as the `querySelectorAll` method. So, it can contain values like `"#element1, .element2"` and `['#element1', '.element2']`.
 
 ### `class` prop
 
@@ -144,23 +148,21 @@ For example, if you want to close the dropdown when you click on its items, set 
 </OutClick>
 ```
 
-### `fullClick` - default: `true`
+### `halfClick` - default: `true`
 
 If `true`, outclick will happen when `pointerdown` and `pointerup` events happen after eachother, outside of the element. If `false`, `pointerdown` can solely determine the click outside.
 
 ### `tag` - default: `'div'`
 
-You can add a prop called `tag` to `OutClick` and change the component tag. Added with the help of the `svelte:element` feature.
+You can add a prop called `tag` to your `OutClick` component and change the wrapper tag. Added with the help of `svelte:element`.
 
 ### Custom attributes
 
-Add your desired attribute to the wrapper element:
+You can add custom attributes to render on the wrapper element. Added with the help of `$$restProps`.
 
 ```
-<OutClick aria-label="Hello" />
+<OutClick aria-label="hello" />
 ```
-
-Added with the help of the `$$restProps` feature.
 
 ---
 
