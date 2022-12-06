@@ -4,10 +4,8 @@ const colors = require("tailwindcss/colors")
 module.exports = {
 	content: ["./src/**/*.{html,svelte}"],
 	theme: {
-		extend: {},
 		colors: {
 			gray: colors.neutral,
 		},
 	},
-	plugins: [],
 }
