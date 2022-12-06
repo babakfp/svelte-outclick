@@ -1,4 +1,4 @@
-`on:outclick`
+# Svelte OutClick `on:outclick`
 
 **v3.3.0** . [**DEMO**][demo] . [**REPO**][repo] . [**NPM**][npm] . [**CHANGELOG**][changelog]
 
@@ -180,10 +180,6 @@ At first, we were using the `click` event to capture the `outclick` event, but l
 
 - `keydown` event on `document.body` is ignored because this is how it works when you use `click` event instead.
 - `keydown` event only triggers with `Enter`, `NumpadEnter`, and `Space` keys (because this is how it works when you use the `click` event instead).
-
-## RoadMap
-
-- Maybe add Typescript support
 
 [repo]: https://github.com/babakfp/svelte-outclick
 [demo]: https://svelte-outclick.vercel.app
