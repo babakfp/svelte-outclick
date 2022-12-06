@@ -51,7 +51,7 @@
 	let wrapper
 
 	/**
-	 * @param {object} eventTarget
+	 * @param {EventTarget} eventTarget
 	 * @returns {boolean}
 	 */
 	const isExcludedElementsContainTheEventTarget = eventTarget => {
@@ -83,7 +83,7 @@
 	}
 
 	/**
-	 * @param {object} eventTarget
+	 * @param {EventTarget} eventTarget
 	 * @returns {boolean}
 	 */
 	const isOutsideEventHappen = eventTarget => {
