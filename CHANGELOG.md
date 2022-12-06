@@ -4,8 +4,13 @@ Restart your app after updating the package.
 
 ## 3.3.0
 
-- Added custom tag support. Now you can add a prop called `tag` into your `OutClick` component and change the component tag. Added with the help of the `svelte:element` feature.
-- Now you can add custom attributes to the component. Added with the help of the `$$restProps` feature.
+- [breaking] Renamed `fullClick` to `halfClick`. default: `false`
+- [breaking] Renamed `excludeByDomNode` to `excludeElements`
+- [breaking] Renamed `excludeByQuerySelector` to `excludeQuerySelectorAll`
+- Now, `excludeByDomNode` can receive a single variable or multiple variables in an array.
+- Now, `excludeQuerySelectorAll` works the same as the `querySelectorAll` method. So, it can contain values like `"#element1, .element2"` and `['#element1', '.element2']`.
+- Added custom tag support. Now you can add a prop called `tag` to your `OutClick` component and change the wrapper tag. Added with the help of `svelte:element`.
+- Now you can add custom attributes to render on the wrapper element. Added with the help of `$$restProps`.
 
 ## 3.2.0
 

@@ -2,54 +2,63 @@
 	import { createEventDispatcher } from "svelte"
 	const dispatch = createEventDispatcher()
 
+	// Wrapper tag
 	export let tag = "div"
 
 	// To use it as HTML `class` attr
 	let className = null
 	export { className as class }
 
-	// Some DOM elements to exclude them from triggering the `outclick` event
-	export let excludeByDomNode = []
-	export let excludeByQuerySelector = []
+	// DOM elements to exclude from triggering the `outclick` event
+	export let excludeElements = null
+	export let excludeQuerySelectorAll = null
 
-	// Whether the component content can contain the event's target or not
+	// Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
+	$: excludeElements = castArray(excludeElements)
+
+	// If the wrapper did contain the event target, allow the `outclick` event to dispatch
 	export let includeSelf = false
 
-	// Should outclick event happen on pointerdown or (pointerdown + pointerup)
-	export let fullClick = true
+	// Should the outclick event happen on (`pointerdown`) or (`pointerdown` + `pointerup`)
+	export let halfClick = false
 
-	// Using this to handle full click functionality, simulating the click event without the dragging issue: https://github.com/babakfp/svelte-outclick/issues/4
-	let didPointerdownOut = false
+	// Using to handle full-click functionality. Simulating the core click event without having this issue: https://github.com/babakfp/svelte-outclick/issues/4
+	let isPointerdownTriggered = false
 
-	// DOM element that wraps all stuff that goes inside the component's <slot />
+	// DOM element that wraps everything that goes inside the component slot
 	let wrapper
 
-	// Whether the excluded elements contain the event's target or not
-	const isClickedOnExcluded = eventTarget => {
+	const isExcludedElementsContainTheEventTarget = eventTarget => {
 		let status = false
 
-		for (let i = 0; i < excludeByDomNode.length; i++) {
-			if (excludeByDomNode[i] && excludeByDomNode[i].contains(eventTarget)) {
+		for (const element of excludeElements) {
+			if (element && element.contains(eventTarget)) {
 				status = true
 				break
 			}
 		}
 
-		for (let i = 0; i < excludeByQuerySelector.length; i++) {
-			let el = document.querySelector(excludeByQuerySelector[i])
-			if (el && el.contains(eventTarget)) {
-				status = true
-				break
+		if (
+			excludeQuerySelectorAll &&
+			((typeof excludeQuerySelectorAll === "string" && excludeQuerySelectorAll !== "") ||
+				(typeof Array.isArray(excludeQuerySelectorAll) && excludeQuerySelectorAll.length > 0))
+		) {
+			const elements = document.querySelectorAll(excludeQuerySelectorAll)
+			for (const element of elements) {
+				if (element.contains(eventTarget)) {
+					status = true
+					break
+				}
 			}
 		}
 
 		return status
 	}
 
-	const didOutsideEventHappen = event => {
+	const isOutsideEventHappen = eventTarget => {
 		if (
-			(includeSelf && wrapper.contains(event.target)) ||
-			(!wrapper.contains(event.target) && !isClickedOnExcluded(event.target))
+			(includeSelf && wrapper.contains(eventTarget)) ||
+			(!wrapper.contains(eventTarget) && !isExcludedElementsContainTheEventTarget(eventTarget))
 		) {
 			return true
 		}
@@ -58,21 +67,21 @@
 	}
 
 	const handlePointerdown = event => {
-		if (didOutsideEventHappen(event)) {
-			if (fullClick) {
-				didPointerdownOut = true
-			} else {
+		if (isOutsideEventHappen(event.target)) {
+			if (halfClick) {
 				dispatch("outclick", { wrapper })
+			} else {
+				isPointerdownTriggered = true
 			}
 		}
 	}
 
 	const handlePointerup = event => {
-		if (!fullClick) return
-		if (didOutsideEventHappen(event) && didPointerdownOut) {
+		if (halfClick) return
+		if (isOutsideEventHappen(event.target) && isPointerdownTriggered) {
 			dispatch("outclick", { wrapper })
 		}
-		didPointerdownOut = false
+		isPointerdownTriggered = false
 	}
 
 	const handleKeydown = event => {
@@ -82,14 +91,18 @@
 			// With `on:click`, the A11Y `keydown`, only these keys trigger the event
 			["Enter", "NumpadEnter", "Space"].includes(event.code)
 		) {
-			if (didOutsideEventHappen(event)) {
+			if (isOutsideEventHappen(event.target)) {
 				dispatch("outclick", { wrapper })
 			}
 		}
 	}
+
+	function castArray(value) {
+		return Array.isArray(value) ? value : [value]
+	}
 </script>
 
-<!-- We have this to capture the window on pointerdown and keydown event. -->
+<!-- Have this to capture the events -->
 <svelte:window
 	on:pointerdown={handlePointerdown}
 	on:pointerup={handlePointerup}
