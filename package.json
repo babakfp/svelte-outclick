@@ -1,7 +1,10 @@
 {
 	"name": "svelte-outclick",
-  "description": "A Svelte component that allows you to listen to the clicks that happen outside of an element.",
-  "version": "3.3.0",
+	"description": "A Svelte component that allows you to listen to the clicks that happen outside of an element.",
+	"version": "3.3.0",
 	"license": "MIT",
-	"svelte": "src/OutClick.svelte"
+	"svelte": "src/OutClick.svelte",
+	"peerDependencies": {
+		"svelte": "3.x"
+	}
 }
