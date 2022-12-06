@@ -3,26 +3,19 @@
 @tailwind utilities;
 
 @layer base {
+	@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
-	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-
-	* { @apply !outline-none select-none focus-visible:ring-8 }
-	
-	body { @apply grid min-h-screen py-12 px-8 bg-gray-900 text-gray-300;
-		font-family: "Montserrat", sans-serif;
+	* {
+		@apply [outline:none] select-none;
 	}
-	
-	body > div { @apply grid content-center gap-8 w-80 max-w-full mx-auto }
 
+	svg {
+		@apply w-[1em] h-[1em] fill-[inherit];
+	}
 }
 
 @layer components {
-
-	.box,
-	.box-excluded,
-	.box-component { @apply z-10 relative flex items-center justify-center text-center h-24 border-2 border-gray-700 bg-gray-900 uppercase text-sm }
-	
-	.box-excluded { @apply border-emerald-700/60 }
-	.box-component { @apply border-orange-700/50 }
-
+	.box {
+		@apply z-10 relative flex items-center justify-center text-center h-20 border-gray-700 border-2 border-dashed rounded text-xs;
+	}
 }

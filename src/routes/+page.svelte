@@ -1,11 +1,11 @@
 <script>
-	import OutClick from 'svelte-outclick'
-	import { count } from '$lib/count.js'
+	import { count } from "$lib/count.js"
+	import OutClick from "svelte-outclick"
 </script>
 
 <OutClick
-	class="box-component"
+	class="box"
 	on:outclick={()=> $count++}
 >
-	outclick component
+	COMPONENT CONTENT
 </OutClick>

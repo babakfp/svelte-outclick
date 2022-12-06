@@ -1,9 +1,13 @@
-const config = {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
-  theme: {
-		extend: {},
-  },
-  plugins: [],
-}
+const colors = require("tailwindcss/colors")
 
-module.exports = config
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+	content: ["./src/**/*.{html,svelte}"],
+	theme: {
+		extend: {},
+		colors: {
+			gray: colors.neutral,
+		},
+	},
+	plugins: [],
+}
