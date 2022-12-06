@@ -25,7 +25,7 @@
 	</svg>
 </button>
 
-<OutClick on:outclick={() => (isOpen = false)} excludeByDomNode={[toggleBtn]}>
+<OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleBtn}>
 	<nav
 		class="
 			z-20 absolute top-0 inset-x-12 duration-200 ease-in-out origin-top bg-gray-800 rounded overflow-hidden

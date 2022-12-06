@@ -6,7 +6,7 @@
 <OutClick
 	class="box"
 	on:outclick={()=> $count++}
-	excludeByQuerySelector={['#nothing-happens']}
+	excludeQuerySelectorAll="#nothing-happens"
 >
 	COMPONENT CONTENT
 </OutClick>

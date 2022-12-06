@@ -5,7 +5,7 @@
 
 <OutClick
 	class="box"
-	fullClick={false}
+	halfClick={true}
 	on:outclick={()=> $count++}
 >
 	COMPONENT CONTENT
