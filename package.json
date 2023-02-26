@@ -3,10 +3,53 @@
 	"description": "A Svelte component that allows you to listen to the clicks that happen outside of an element.",
 	"version": "3.3.3",
 	"license": "MIT",
-	"svelte": "src/OutClick.svelte",
 	"repository": "github:babakfp/svelte-outclick",
 	"homepage": "https://babakfp.ir/docs/svelte-outclick",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"format": "prettier --plugin-search-dir . --write .",
+		"package": "svelte-kit sync && svelte-package && publint",
+		"prepublishOnly": "npm run package",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist"
+	],
 	"peerDependencies": {
 		"svelte": "3.x"
-	}
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-vercel": "2.1.1",
+		"@sveltejs/kit": "1.8.5",
+		"@sveltejs/package": "2.0.0",
+		"@trivago/prettier-plugin-sort-imports": "4.1.1",
+		"autoprefixer": "10.4.13",
+		"cssnano": "5.1.15",
+		"postcss": "8.4.21",
+		"postcss-load-config": "4.0.1",
+		"prettier": "2.8.4",
+		"prettier-plugin-svelte": "2.9.0",
+		"prettier-plugin-tailwindcss": "0.2.3",
+		"publint": "0.1.9",
+		"svelte": "3.55.1",
+		"svelte-check": "3.0.1",
+		"svelte-outclick": "3.3.3",
+		"svelte-preprocess": "5.0.1",
+		"tailwindcss": "3.2.7",
+		"tslib": "2.4.1",
+		"typescript": "4.9.3",
+		"vite": "4.1.4"
+	},
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"type": "module"
 }
