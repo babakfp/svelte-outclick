@@ -11,7 +11,7 @@
 
 	// DOM elements to exclude from triggering the `outclick` event
 	export let excludeElements: HTMLElement[] | null | undefined = null
-	export let excludeQuerySelectorAll: string | string[] | null | undefined = null
+	export let excludeQuerySelectorAll: string | null | undefined = null
 
 	// Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
 	$: excludeElements = castArray(excludeElements)
@@ -28,10 +28,10 @@
 	// DOM element that wraps everything that goes inside the component slot
 	let wrapper: HTMLElement
 
-	const isExcludedElementsContainTheEventTarget = (target: EventTarget): boolean => {
+	const isExcludedElementsContainTheEventTarget = (target: Element): boolean => {
 		let status: boolean = false
 
-		if (excludeElements) {
+		if (excludeElements && excludeElements.length > 0) {
 			for (const element of excludeElements) {
 				if (element && element.contains(target)) {
 					status = true
@@ -40,14 +40,10 @@
 			}
 		}
 
-		if (
-			excludeQuerySelectorAll &&
-			((typeof excludeQuerySelectorAll === "string" && excludeQuerySelectorAll !== "") ||
-				(typeof Array.isArray(excludeQuerySelectorAll) && excludeQuerySelectorAll.length > 0))
-		) {
+		if (excludeQuerySelectorAll) {
 			const elements = document.querySelectorAll(excludeQuerySelectorAll)
 			for (const element of elements) {
-				if (element.contains(target)) {
+				if (element && element.contains(target)) {
 					status = true
 					break
 				}
@@ -57,7 +53,7 @@
 		return status
 	}
 
-	const isOutsideEventHappen = (target: EventTarget): boolean => {
+	const isOutsideEventHappen = (target: Element): boolean => {
 		if (
 			(includeSelf && wrapper.contains(target)) ||
 			(!wrapper.contains(target) && !isExcludedElementsContainTheEventTarget(target))
@@ -69,7 +65,7 @@
 	}
 
 	const handlePointerdown = (e: PointerEvent): void => {
-		if (isOutsideEventHappen(e.target)) {
+		if (isOutsideEventHappen(e.target as Element)) {
 			if (halfClick) {
 				dispatch("outclick", { wrapper })
 			} else {
@@ -80,7 +76,7 @@
 
 	const handlePointerup = (e: PointerEvent): void => {
 		if (halfClick) return
-		if (isOutsideEventHappen(e.target) && isPointerdownTriggered) {
+		if (isOutsideEventHappen(e.target as Element) && isPointerdownTriggered) {
 			dispatch("outclick", { wrapper })
 		}
 		isPointerdownTriggered = false
@@ -93,7 +89,7 @@
 			// With `on:click`, the A11Y `keydown`, only these keys trigger the event
 			["Enter", "NumpadEnter", "Space"].includes(e.code)
 		) {
-			if (isOutsideEventHappen(e.target)) {
+			if (isOutsideEventHappen(e.target as Element)) {
 				dispatch("outclick", { wrapper })
 			}
 		}
