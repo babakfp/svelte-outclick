@@ -17,8 +17,8 @@
 	},
 	"exports": {
 		".": {
-			"svelte": "./dist/OutClick.svelte",
-			"types": "./dist/OutClick.svelte.d.ts"
+			"types": "./dist/OutClick.svelte.d.ts",
+			"svelte": "./dist/OutClick.svelte"
 		}
 	},
 	"files": [
@@ -48,7 +48,7 @@
 		"typescript": "4.9.5",
 		"vite": "4.1.4"
 	},
-	"svelte": "./dist/OutClick.svelte",
 	"types": "./dist/OutClick.svelte.d.ts",
+	"svelte": "./dist/OutClick.svelte",
 	"type": "module"
 }
