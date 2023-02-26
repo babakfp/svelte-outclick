@@ -10,11 +10,11 @@
 	export { className as class }
 
 	// DOM elements to exclude from triggering the `outclick` event
-	export let excludeElements: HTMLElement[] | null | undefined = null
+	export let excludeElements: HTMLElement | HTMLElement[] | null | undefined = null
 	export let excludeQuerySelectorAll: string | null | undefined = null
 
 	// Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
-	$: excludeElements = castArray(excludeElements)
+	const excludeElementsArray = excludeElements ? castArray(excludeElements) : []
 
 	// If the wrapper did contain the event target, allow the `outclick` event to dispatch
 	export let includeSelf: boolean = false
@@ -31,8 +31,8 @@
 	const isExcludedElementsContainTheEventTarget = (target: HTMLElement): boolean => {
 		let status: boolean = false
 
-		if (excludeElements && excludeElements.length > 0) {
-			for (const element of excludeElements) {
+		if (excludeElementsArray && excludeElementsArray.length > 0) {
+			for (const element of excludeElementsArray) {
 				if (element && element.contains(target)) {
 					status = true
 					break
