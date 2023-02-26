@@ -28,7 +28,7 @@
 	// DOM element that wraps everything that goes inside the component slot
 	let wrapper: HTMLElement
 
-	const isExcludedElementsContainTheEventTarget = (target: Element): boolean => {
+	const isExcludedElementsContainTheEventTarget = (target: HTMLElement): boolean => {
 		let status: boolean = false
 
 		if (excludeElements && excludeElements.length > 0) {
@@ -53,7 +53,7 @@
 		return status
 	}
 
-	const isOutsideEventHappen = (target: Element): boolean => {
+	const isOutsideEventHappen = (target: HTMLElement): boolean => {
 		if (
 			(includeSelf && wrapper.contains(target)) ||
 			(!wrapper.contains(target) && !isExcludedElementsContainTheEventTarget(target))
@@ -65,7 +65,7 @@
 	}
 
 	const handlePointerdown = (e: PointerEvent): void => {
-		if (isOutsideEventHappen(e.target as Element)) {
+		if (isOutsideEventHappen(e.target as HTMLElement)) {
 			if (halfClick) {
 				dispatch("outclick", { wrapper })
 			} else {
@@ -76,7 +76,7 @@
 
 	const handlePointerup = (e: PointerEvent): void => {
 		if (halfClick) return
-		if (isOutsideEventHappen(e.target as Element) && isPointerdownTriggered) {
+		if (isOutsideEventHappen(e.target as HTMLElement) && isPointerdownTriggered) {
 			dispatch("outclick", { wrapper })
 		}
 		isPointerdownTriggered = false
@@ -89,7 +89,7 @@
 			// With `on:click`, the A11Y `keydown`, only these keys trigger the event
 			["Enter", "NumpadEnter", "Space"].includes(e.code)
 		) {
-			if (isOutsideEventHappen(e.target as Element)) {
+			if (isOutsideEventHappen(e.target as HTMLElement)) {
 				dispatch("outclick", { wrapper })
 			}
 		}
