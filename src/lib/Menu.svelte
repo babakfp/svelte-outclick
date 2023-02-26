@@ -15,7 +15,7 @@
 </script>
 
 <button
-	class="flex items-center justify-center w-8 h-8 bg-gray-800 rounded text-gray-400 duration-150 hover:bg-gray-700"
+	class="flex h-8 w-8 items-center justify-center rounded bg-gray-800 text-gray-400 duration-150 hover:bg-gray-700"
 	bind:this={toggleBtn}
 	on:click={() => (isOpen = !isOpen)}
 >
@@ -28,15 +28,19 @@
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleBtn}>
 	<nav
 		class="
-			z-20 absolute top-0 inset-x-12 duration-200 ease-in-out origin-top bg-gray-800 rounded overflow-hidden
-			scale-0 -translate-y-4 pointer-events-none opacity-0 invisible
-			{isOpen && '!scale-100 !translate-y-0 !pointer-events-auto !opacity-100 !visible'}
+			pointer-events-none invisible absolute inset-x-12 top-0 z-20 origin-top -translate-y-4 scale-0 overflow-hidden
+			rounded bg-gray-800 opacity-0 duration-200 ease-in-out
+			{isOpen &&
+			'!pointer-events-auto !visible !translate-y-0 !scale-100 !opacity-100'}
 		"
 	>
 		<ul>
 			{#each items as item}
 				<li>
-					<a class="block px-4 py-2.5 text-xs duration-150 hover:bg-gray-700" href={item.href}>
+					<a
+						class="block px-4 py-2.5 text-xs duration-150 hover:bg-gray-700"
+						href={item.href}
+					>
 						{item.title}
 					</a>
 				</li>

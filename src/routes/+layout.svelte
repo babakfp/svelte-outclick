@@ -15,13 +15,14 @@
 				$description =
 					"You can exclude an element/elements from triggering the event when clicked outside!"
 			} else if ($page.url.pathname === "/half-click") {
-				$description = "Trigger the event on pointer-down instead of a full-click action!"
+				$description =
+					"Trigger the event on pointer-down instead of a full-click action!"
 			}
 		}
 	}
 </script>
 
-<div class="relative | flex items-center gap-4 justify-between">
+<div class="relative flex items-center justify-between gap-4">
 	<Counter />
 	<Menu />
 </div>
@@ -31,7 +32,7 @@
 </div>
 
 {#if $description}
-	<p class="text-xs leading-6 text-gray-400 font-mono">
+	<p class="font-mono text-xs leading-6 text-gray-400">
 		{$description}
 	</p>
 {/if}

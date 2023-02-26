@@ -6,16 +6,16 @@
 	@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
 	* {
-		@apply [outline:none] select-none;
+		@apply select-none [outline:none];
 	}
 
 	svg {
-		@apply w-[1em] h-[1em] fill-[inherit];
+		@apply h-[1em] w-[1em] fill-[inherit];
 	}
 }
 
 @layer components {
 	.box {
-		@apply z-10 relative flex items-center justify-center text-center h-20 border-gray-700 border-2 border-dashed rounded text-xs;
+		@apply relative z-10 flex h-20 items-center justify-center rounded border-2 border-dashed border-gray-700 text-center text-xs;
 	}
 }

@@ -3,9 +3,4 @@
 	import OutClick from "svelte-outclick"
 </script>
 
-<OutClick
-	class="box"
-	on:outclick={()=> $count++}
->
-	COMPONENT CONTENT
-</OutClick>
+<OutClick class="box" on:outclick={() => $count++}>COMPONENT CONTENT</OutClick>

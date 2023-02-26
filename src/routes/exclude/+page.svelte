@@ -5,12 +5,10 @@
 
 <OutClick
 	class="box"
-	on:outclick={()=> $count++}
+	on:outclick={() => $count++}
 	excludeQuerySelectorAll="#nothing-happens"
 >
 	COMPONENT CONTENT
 </OutClick>
 
-<div class="box" id="nothing-happens">
-	NOTHING HAPPENS
-</div>
+<div class="box" id="nothing-happens">NOTHING HAPPENS</div>
