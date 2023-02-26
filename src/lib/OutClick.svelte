@@ -28,12 +28,12 @@
 	// DOM element that wraps everything that goes inside the component slot
 	let wrapper: HTMLElement
 
-	const isExcludedElementsContainTheEventTarget = (eventTarget: EventTarget): boolean => {
+	const isExcludedElementsContainTheEventTarget = (target: EventTarget): boolean => {
 		let status: boolean = false
 
 		if (excludeElements) {
 			for (const element of excludeElements) {
-				if (element && element.contains(eventTarget)) {
+				if (element && element.contains(target)) {
 					status = true
 					break
 				}
@@ -47,7 +47,7 @@
 		) {
 			const elements = document.querySelectorAll(excludeQuerySelectorAll)
 			for (const element of elements) {
-				if (element.contains(eventTarget)) {
+				if (element.contains(target)) {
 					status = true
 					break
 				}
@@ -57,10 +57,10 @@
 		return status
 	}
 
-	const isOutsideEventHappen = (eventTarget: EventTarget): boolean => {
+	const isOutsideEventHappen = (target: EventTarget): boolean => {
 		if (
-			(includeSelf && wrapper.contains(eventTarget)) ||
-			(!wrapper.contains(eventTarget) && !isExcludedElementsContainTheEventTarget(eventTarget))
+			(includeSelf && wrapper.contains(target)) ||
+			(!wrapper.contains(target) && !isExcludedElementsContainTheEventTarget(target))
 		) {
 			return true
 		}
@@ -68,8 +68,8 @@
 		return false
 	}
 
-	const handlePointerdown = (event: PointerEvent): void => {
-		if (isOutsideEventHappen(event.target)) {
+	const handlePointerdown = (e: PointerEvent): void => {
+		if (isOutsideEventHappen(e.target)) {
 			if (halfClick) {
 				dispatch("outclick", { wrapper })
 			} else {
@@ -78,22 +78,22 @@
 		}
 	}
 
-	const handlePointerup = (event: PointerEvent): void => {
+	const handlePointerup = (e: PointerEvent): void => {
 		if (halfClick) return
-		if (isOutsideEventHappen(event.target) && isPointerdownTriggered) {
+		if (isOutsideEventHappen(e.target) && isPointerdownTriggered) {
 			dispatch("outclick", { wrapper })
 		}
 		isPointerdownTriggered = false
 	}
 
-	const handleKeydown = (event: KeyboardEvent): void => {
+	const handleKeydown = (e: KeyboardEvent): void => {
 		if (
 			// With `on:click`, the A11Y `keydown` event doesn't trigger on `document.body`, so we are just duplicating the same behavior here.
-			event.target !== document.body &&
+			e.target !== document.body &&
 			// With `on:click`, the A11Y `keydown`, only these keys trigger the event
-			["Enter", "NumpadEnter", "Space"].includes(event.code)
+			["Enter", "NumpadEnter", "Space"].includes(e.code)
 		) {
-			if (isOutsideEventHappen(event.target)) {
+			if (isOutsideEventHappen(e.target)) {
 				dispatch("outclick", { wrapper })
 			}
 		}
