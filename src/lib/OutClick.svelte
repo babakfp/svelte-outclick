@@ -1,67 +1,42 @@
-<script>
+<script lang="ts">
 	import { createEventDispatcher } from "svelte"
 	const dispatch = createEventDispatcher()
 
-	/**
-	 * Wrapper tag
-	 * @type {string}
-	 */
-	export let tag = "div"
+	// Wrapper tag
+	export let tag: string = "div"
 
-	/**
-	 * To use it as HTML `class` attr
-	 * @type {string | null | undefined}
-	 */
-	let className = null
+	// To use it as HTML `class` attr
+	let className: string | null | undefined = null
 	export { className as class }
 
-	/**
-	 * DOM elements to exclude from triggering the `outclick` event
-	 * @type {HTMLElement[] | null | undefined} excludeElements
-	 * @type {string | string[] | null | undefined} excludeQuerySelectorAll
-	 */
-	export let excludeElements = null
-	export let excludeQuerySelectorAll = null
+	// DOM elements to exclude from triggering the `outclick` event
+	export let excludeElements: HTMLElement[] | null | undefined = null
+	export let excludeQuerySelectorAll: string | string[] | null | undefined = null
 
 	// Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
 	$: excludeElements = castArray(excludeElements)
 
-	/**
-	 * If the wrapper did contain the event target, allow the `outclick` event to dispatch
-	 * @type {boolean}
-	 */
-	export let includeSelf = false
+	// If the wrapper did contain the event target, allow the `outclick` event to dispatch
+	export let includeSelf: boolean = false
 
-	/**
-	 * Should the outclick event happen on (`pointerdown`) or (`pointerdown` + `pointerup`)
-	 * @type {boolean}
-	 */
-	export let halfClick = false
+	// Should the outclick event happen on (`pointerdown`) or (`pointerdown` + `pointerup`)
+	export let halfClick: boolean = false
 
-	/**
-	 * Using to handle full-click functionality. Simulating the core click event without having this issue: https://github.com/babakfp/svelte-outclick/issues/4
-	 * @type {boolean}
-	 */
-	let isPointerdownTriggered = false
+	// Using to handle full-click functionality. Simulating the core click event without having this issue: https://github.com/babakfp/svelte-outclick/issues/4
+	let isPointerdownTriggered: boolean = false
 
-	/**
-	 * DOM element that wraps everything that goes inside the component slot
-	 * @type {HTMLElement}
-	 */
-	let wrapper
+	// DOM element that wraps everything that goes inside the component slot
+	let wrapper: HTMLElement
 
-	/**
-	 * @param {EventTarget} eventTarget
-	 * @returns {boolean}
-	 */
-	const isExcludedElementsContainTheEventTarget = eventTarget => {
-		/** @type {boolean} */
-		let status = false
+	const isExcludedElementsContainTheEventTarget = (eventTarget: EventTarget): boolean => {
+		let status: boolean = false
 
-		for (const element of excludeElements) {
-			if (element && element.contains(eventTarget)) {
-				status = true
-				break
+		if (excludeElements) {
+			for (const element of excludeElements) {
+				if (element && element.contains(eventTarget)) {
+					status = true
+					break
+				}
 			}
 		}
 
@@ -82,11 +57,7 @@
 		return status
 	}
 
-	/**
-	 * @param {EventTarget} eventTarget
-	 * @returns {boolean}
-	 */
-	const isOutsideEventHappen = eventTarget => {
+	const isOutsideEventHappen = (eventTarget: EventTarget): boolean => {
 		if (
 			(includeSelf && wrapper.contains(eventTarget)) ||
 			(!wrapper.contains(eventTarget) && !isExcludedElementsContainTheEventTarget(eventTarget))
@@ -97,11 +68,7 @@
 		return false
 	}
 
-	/**
-	 * @param {PointerEvent} event
-	 * @returns {void}
-	 */
-	const handlePointerdown = event => {
+	const handlePointerdown = (event: PointerEvent): void => {
 		if (isOutsideEventHappen(event.target)) {
 			if (halfClick) {
 				dispatch("outclick", { wrapper })
@@ -111,11 +78,7 @@
 		}
 	}
 
-	/**
-	 * @param {PointerEvent} event
-	 * @returns {void}
-	 */
-	const handlePointerup = event => {
+	const handlePointerup = (event: PointerEvent): void => {
 		if (halfClick) return
 		if (isOutsideEventHappen(event.target) && isPointerdownTriggered) {
 			dispatch("outclick", { wrapper })
@@ -123,11 +86,7 @@
 		isPointerdownTriggered = false
 	}
 
-	/**
-	 * @param {KeyboardEvent} event
-	 * @returns {void}
-	 */
-	const handleKeydown = event => {
+	const handleKeydown = (event: KeyboardEvent): void => {
 		if (
 			// With `on:click`, the A11Y `keydown` event doesn't trigger on `document.body`, so we are just duplicating the same behavior here.
 			event.target !== document.body &&
@@ -140,11 +99,7 @@
 		}
 	}
 
-	/**
-	 * @param {any} value
-	 * @returns {any[]}
-	 */
-	function castArray(value) {
+	function castArray(value: any): any[] {
 		return Array.isArray(value) ? value : [value]
 	}
 </script>
