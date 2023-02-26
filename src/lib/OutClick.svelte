@@ -14,7 +14,7 @@
 	export let excludeQuerySelectorAll: string | null | undefined = null
 
 	// Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
-	const excludeElementsArray = excludeElements ? castArray(excludeElements) : []
+	$: excludeElementsArray = excludeElements ? castArray(excludeElements) : []
 
 	// If the wrapper did contain the event target, allow the `outclick` event to dispatch
 	export let includeSelf: boolean = false
