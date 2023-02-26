@@ -4,10 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "dev:host": "vite dev --host",
     "build": "vite build",
-    "preview": "vite preview",
-    "preview:host": "vite preview --host"
+    "preview": "vite preview"
   },
   "devDependencies": {
     "@sveltejs/adapter-vercel": "2.1.1",
