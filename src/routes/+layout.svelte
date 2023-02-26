@@ -5,6 +5,7 @@
 	import { description } from "$libd/description.js"
 	import Counter from "$libd/Counter.svelte"
 	import Menu from "$libd/Menu.svelte"
+	import LoadingBar from "$libd/LoadingBar.svelte"
 
 	$: {
 		if (navigating) {
@@ -19,6 +20,8 @@
 		}
 	}
 </script>
+
+<LoadingBar />
 
 <div class="relative flex items-center justify-between gap-4">
 	<Counter />
