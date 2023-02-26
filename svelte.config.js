@@ -5,6 +5,9 @@ import preprocess from "svelte-preprocess"
 const config = {
 	kit: {
 		adapter: adapter(),
+		alias: {
+			"svelte-outclick": "./src/lib/OutClick.svelte",
+		},
 	},
 	preprocess: [preprocess({ postcss: true })],
 }
