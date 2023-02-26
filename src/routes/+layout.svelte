@@ -2,9 +2,9 @@
 	import "../app.postcss"
 
 	import { navigating, page } from "$app/stores"
-	import { description } from "$lib/description.js"
-	import Counter from "$lib/Counter.svelte"
-	import Menu from "$lib/Menu.svelte"
+	import { description } from "$libd/description.js"
+	import Counter from "$libd/Counter.svelte"
+	import Menu from "$libd/Menu.svelte"
 
 	$: {
 		if (navigating) {

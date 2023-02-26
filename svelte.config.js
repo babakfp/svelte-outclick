@@ -6,7 +6,8 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		alias: {
-			"svelte-outclick": "./src/lib/OutClick.svelte",
+			"$libd": "src/libd",
+			"svelte-outclick": "src/lib/OutClick.svelte",
 		},
 	},
 	preprocess: [preprocess({ postcss: true })],

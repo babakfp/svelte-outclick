@@ -1,5 +1,5 @@
 <script>
-	import { count } from "$lib/count.js"
+	import { count } from "$libd/count.js"
 	import OutClick from "svelte-outclick"
 </script>
 

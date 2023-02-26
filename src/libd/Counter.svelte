@@ -1,6 +1,6 @@
 <script>
 	import { fly } from "svelte/transition"
-	import { count } from "$lib/count.js"
+	import { count } from "$libd/count.js"
 </script>
 
 <div
