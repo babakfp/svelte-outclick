@@ -4,6 +4,7 @@ node_modules
 /.svelte-kit
 /.vercel
 /package
+/package-dist
 /dist
 .env
 .env.*
