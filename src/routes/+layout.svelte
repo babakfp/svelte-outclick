@@ -1,11 +1,10 @@
-<script>
-	import "../app.postcss"
-
+<script lang="ts">
 	import { navigating, page } from "$app/stores"
-	import { description } from "$lib/description.js"
 	import Counter from "$lib/Counter.svelte"
-	import Menu from "$lib/Menu.svelte"
 	import LoadingBar from "$lib/LoadingBar.svelte"
+	import Menu from "$lib/Menu.svelte"
+	import { description } from "$lib/description.js"
+	import "../app.postcss"
 
 	$: {
 		if (navigating) {

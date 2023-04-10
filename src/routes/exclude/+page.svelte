@@ -1,6 +1,6 @@
-<script>
-	import { count } from "$lib/count.js"
+<script lang="ts">
 	import OutClick from "svelte-outclick"
+	import { count } from "$lib/count.js"
 </script>
 
 <OutClick

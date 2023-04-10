@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
 	import { navigating } from "$app/stores"
+
 	export let delay = 250
 	let delayedPreloading = false
 	$: setTimeout(() => (delayedPreloading = !!$navigating), delay)

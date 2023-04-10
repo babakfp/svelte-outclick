@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { fly } from "svelte/transition"
 	import { count } from "$lib/count.js"
 </script>

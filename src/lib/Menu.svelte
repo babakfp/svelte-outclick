@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import OutClick from "svelte-outclick"
 	import { beforeNavigate } from "$app/navigation"
 
@@ -9,7 +9,7 @@
 	]
 
 	let isOpen = false
-	let toggleBtn
+	let toggleBtn: HTMLButtonElement
 
 	beforeNavigate(() => (isOpen = false))
 </script>
