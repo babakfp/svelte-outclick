@@ -7,7 +7,6 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		alias: {
-			"$libd": "src/libd",
 			"svelte-outclick": "src/package/OutClick.svelte",
 		},
 	},
