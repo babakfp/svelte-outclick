@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { LoadingBar } from "svelte-loading-bar"
 	import { navigating, page } from "$app/stores"
 	import Counter from "$lib/Counter.svelte"
-	import LoadingBar from "$lib/LoadingBar.svelte"
 	import Menu from "$lib/Menu.svelte"
 	import { description } from "$lib/description.js"
 	import "../app.postcss"
