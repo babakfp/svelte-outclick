@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import OutClick from "svelte-outclick"
 	import { beforeNavigate } from "$app/navigation"
 
@@ -9,7 +9,7 @@
 	]
 
 	let isOpen = false
-	let toggleBtn
+	let toggleBtn: HTMLButtonElement
 
 	beforeNavigate(() => (isOpen = false))
 </script>
@@ -20,9 +20,7 @@
 	on:click={() => (isOpen = !isOpen)}
 >
 	<!-- prettier-ignore -->
-	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-		<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-	</svg>
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"/></svg>
 </button>
 
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleBtn}>
