@@ -8,7 +8,7 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			"$libd": "src/libd",
-			"svelte-outclick": "src/lib/OutClick.svelte",
+			"svelte-outclick": "src/package/OutClick.svelte",
 		},
 	},
 }
