@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { LoadingBar } from "svelte-loading-bar"
+	import { fly } from "svelte/transition"
 	import { navigating, page } from "$app/stores"
 	import Counter from "$lib/Counter.svelte"
 	import Menu from "$lib/Menu.svelte"
@@ -27,12 +28,17 @@
 	<Menu />
 </div>
 
-<div class="grid gap-2">
-	<slot />
-</div>
+{#key $page.url.pathname}
+	<div class="grid gap-2" in:fly={{ y: 64, duration: 300 }}>
+		<slot />
+	</div>
 
-{#if $description}
-	<p class="font-mono text-xs leading-5 text-gray-400">
-		{@html $description}
-	</p>
-{/if}
+	{#if $description}
+		<p
+			class="font-mono text-xs leading-5 text-gray-400"
+			in:fly={{ y: 32, duration: 300, delay: 100 }}
+		>
+			{@html $description}
+		</p>
+	{/if}
+{/key}
