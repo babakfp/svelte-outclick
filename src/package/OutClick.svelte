@@ -28,7 +28,7 @@
 	// DOM element that wraps everything that goes inside the component slot
 	let wrapper: HTMLElement
 
-	const isExcludedElementsContainTheEventTarget = (target: HTMLElement): boolean => {
+	const didClickOnExcludedElement = (target: HTMLElement): boolean => {
 		let status: boolean = false
 
 		if (excludeElementsArray && excludeElementsArray.length > 0) {
@@ -56,7 +56,7 @@
 	const isOutsideEventHappen = (target: HTMLElement): boolean => {
 		if (
 			(includeSelf && wrapper.contains(target)) ||
-			(!wrapper.contains(target) && !isExcludedElementsContainTheEventTarget(target))
+			(!wrapper.contains(target) && !didClickOnExcludedElement(target))
 		) {
 			return true
 		}
