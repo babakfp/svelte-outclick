@@ -68,7 +68,7 @@
     const handlePointerdown = (e: PointerEvent): void => {
         if (isOutsideEventHappen(e.target as HTMLElement)) {
             if (halfClick) {
-                dispatch("outclick", { wrapper })
+                dispatch("outclick")
             } else {
                 isPointerdownTriggered = true
             }
@@ -81,7 +81,7 @@
             isOutsideEventHappen(e.target as HTMLElement) &&
             isPointerdownTriggered
         ) {
-            dispatch("outclick", { wrapper })
+            dispatch("outclick")
         }
         isPointerdownTriggered = false
     }
@@ -94,7 +94,7 @@
             ["Enter", "NumpadEnter", "Space"].includes(e.code)
         ) {
             if (isOutsideEventHappen(e.target as HTMLElement)) {
-                dispatch("outclick", { wrapper })
+                dispatch("outclick")
             }
         }
     }
