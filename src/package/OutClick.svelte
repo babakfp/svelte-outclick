@@ -6,13 +6,12 @@
     export let tag: string = "div"
 
     // To use it as HTML `class` attr
-    let className: string | null | undefined = null
+    let className: string | null = null
     export { className as class }
 
     // DOM elements to exclude from triggering the `outclick` event
-    export let excludeElements: HTMLElement | HTMLElement[] | null | undefined =
-        null
-    export let excludeQuerySelectorAll: string | null | undefined = null
+    export let excludeElements: HTMLElement | HTMLElement[] | null = null
+    export let excludeQuerySelectorAll: string | null = null
 
     // Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
     $: excludeElementsArray = excludeElements ? castArray(excludeElements) : []
