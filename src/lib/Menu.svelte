@@ -2,6 +2,7 @@
     import { beforeNavigate } from "$app/navigation"
     import { page } from "$app/stores"
     import OutClick from "svelte-outclick"
+    import IconMenu from "./IconMenu.svelte"
 
     const items = [
         { title: "HOME", href: "/" },
@@ -20,8 +21,7 @@
     bind:this={toggleBtn}
     on:click={() => (isOpen = !isOpen)}
 >
-    <!-- prettier-ignore -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"/></svg>
+    <IconMenu />
 </button>
 
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleBtn}>

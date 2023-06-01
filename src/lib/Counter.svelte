@@ -17,4 +17,4 @@
     {/key}
 </div>
 
-<span class="text-xs text-gray-400">TIMES CLICKED OUTSIDE</span>
+<span class="font-mono text-xs text-gray-400">TIMES CLICKED OUTSIDE</span>

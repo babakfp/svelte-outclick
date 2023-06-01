@@ -3,14 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
-
     * {
         @apply select-none [outline:none];
     }
 
-    svg {
-        @apply h-[1em] w-[1em] fill-[inherit];
+    svg.icon {
+        @apply pointer-events-none inline-block h-[1em] w-[1em] fill-current;
     }
 }
 

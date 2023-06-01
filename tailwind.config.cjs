@@ -1,12 +1,17 @@
 const colors = require("tailwindcss/colors")
+const defaultTheme = require("tailwindcss/defaultTheme")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ["./src/**/*.{html,svelte}"],
     theme: {
-        colors: {
-            white: colors.white,
-            gray: colors.neutral,
+        extend: {
+            colors: {
+                gray: colors.neutral,
+            },
+            fontFamily: {
+                sans: ["Inter", defaultTheme.fontFamily.sans],
+            },
         },
     },
 }

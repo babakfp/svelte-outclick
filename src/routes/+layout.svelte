@@ -35,7 +35,7 @@
 
     {#if $description}
         <p
-            class="font-mono text-xs leading-5 text-gray-400"
+            class="text-xs leading-5 text-gray-400"
             in:fly={{ y: 32, duration: 300, delay: 100 }}
         >
             {@html $description}
