@@ -6,12 +6,12 @@
     export let tag: string = "div"
 
     // To use it as HTML `class` attr
-    let className: string | null = null
+    let className: string = ""
     export { className as class }
 
     // DOM elements to exclude from triggering the `outclick` event
-    export let excludeElements: HTMLElement | HTMLElement[] | null = null
-    export let excludeQuerySelectorAll: string | null = null
+    export let excludeElements: HTMLElement | HTMLElement[] = []
+    export let excludeQuerySelectorAll: string = ""
 
     // Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
     $: excludeElementsArray = excludeElements ? castArray(excludeElements) : []
@@ -113,7 +113,7 @@
 <svelte:element
     this={tag}
     bind:this={wrapper}
-    class={className}
+    class={className || undefined}
     style={!className ? "display: contents" : null}
     {...$$restProps}
 >
