@@ -4,5 +4,5 @@
 </script>
 
 <OutClick class="box bg-stripes-blue-400/10" on:outclick={() => $count++}>
-    COMPONENT CONTENT</OutClick
->
+    COMPONENT CONTENT
+</OutClick>
