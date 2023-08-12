@@ -10,10 +10,10 @@
         "build": "vite build",
         "preview": "vite preview",
         "prepare": "svelte-kit sync",
-        "lint": "prettier --check .",
-        "format": "prettier --write .",
         "package": "svelte-kit sync && svelte-package -i src/package && publint",
         "prepublishOnly": "npm run package",
+        "lint": "prettier --check .",
+        "format": "prettier --write .",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
     },
