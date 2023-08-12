@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     semi: false,
     tabWidth: 4,
     arrowParens: "avoid",
@@ -6,8 +6,5 @@ module.exports = {
         { files: "*.svelte", options: { parser: "svelte" } },
         { files: "*.md", options: { tabWidth: 2 } },
     ],
-    plugins: [
-        require("prettier-plugin-svelte"),
-        require("prettier-plugin-tailwindcss"),
-    ],
+    plugins: ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
 }
