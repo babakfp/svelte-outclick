@@ -1,19 +1,18 @@
 {
     "name": "svelte-outclick",
-    "description": "A Svelte component that allows you to listen to the clicks that happen outside of an element.",
     "version": "3.6.2",
+    "description": "A Svelte component that allows you to listen to the clicks that happen outside of an element.",
     "license": "MIT",
     "repository": "github:babakfp/svelte-outclick",
     "homepage": "https://babakfp.ir/docs/svelte-outclick",
     "scripts": {
         "dev": "vite dev",
-        "build": "vite build",
+        "build": "vite build && npm run package",
         "preview": "vite preview",
         "prepare": "svelte-kit sync",
         "package": "svelte-kit sync && svelte-package -i src/package && publint",
         "prepublishOnly": "npm run package",
-        "lint": "prettier --check .",
-        "format": "prettier --write .",
+        "format": "prettier -w .",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
     },
@@ -27,30 +26,28 @@
         "dist"
     ],
     "peerDependencies": {
-        "svelte": "^3.0.0 || ^4.0.0"
-    },
-    "optionalDependencies": {
-        "@sveltejs/kit": "^1.22.5"
+        "svelte": "3.x || 4.x"
     },
     "devDependencies": {
-        "@sveltejs/adapter-vercel": "3.0.3",
-        "@sveltejs/kit": "1.22.5",
-        "@sveltejs/package": "2.2.1",
-        "autoprefixer": "10.4.14",
-        "cssnano": "6.0.1",
-        "postcss": "8.4.27",
-        "postcss-load-config": "4.0.1",
-        "prettier": "3.0.1",
-        "prettier-plugin-svelte": "3.0.3",
-        "prettier-plugin-tailwindcss": "0.5.2",
-        "publint": "0.2.0",
-        "svelte": "4.2.0",
-        "svelte-check": "3.5.0",
-        "svelte-loading-bar": "0.0.6",
-        "tailwindcss": "3.3.3",
-        "tslib": "2.6.1",
-        "typescript": "5.1.6",
-        "vite": "4.4.9"
+        "@sveltejs/adapter-vercel": "4.0.1",
+        "@sveltejs/kit": "2.0.0",
+        "@sveltejs/package": "2.2.3",
+        "@sveltejs/vite-plugin-svelte": "3.0.1",
+        "autoprefixer": "10.4.16",
+        "cssnano": "6.0.2",
+        "postcss": "8.4.32",
+        "postcss-load-config": "5.0.2",
+        "prettier": "3.1.1",
+        "prettier-plugin-svelte": "3.1.2",
+        "prettier-plugin-tailwindcss": "0.5.9",
+        "publint": "0.2.6",
+        "svelte": "4.2.8",
+        "svelte-check": "3.6.2",
+        "svelte-loading-bar": "1.0.0",
+        "tailwindcss": "3.3.6",
+        "tslib": "2.6.2",
+        "typescript": "5.3.3",
+        "vite": "5.0.9"
     },
     "types": "./dist/OutClick.svelte.d.ts",
     "svelte": "./dist/OutClick.svelte",
