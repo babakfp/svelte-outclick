@@ -37,7 +37,7 @@
             {#each items as item}
                 <li>
                     <a
-                        class="block px-4 py-2.5 text-xs duration-150 hover:bg-gray-700
+                        class="block px-4 py-2.5 text-xs -outline-offset-2 duration-150 hover:bg-gray-700
 							{item.href === $page.url.pathname && '!bg-gray-200 text-gray-800 '}
 						"
                         href={item.href}
