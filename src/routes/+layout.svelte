@@ -23,25 +23,30 @@
 
 <LoadingBar />
 
-<div class="relative flex items-center justify-between gap-4">
-    <div class="flex items-center gap-2">
-        <Counter />
-        <span class="text-xs text-gray-400">: TIMES CLICKED OUTSIDE</span>
-    </div>
+<div>
     <Menu />
-</div>
 
-{#key $page.url.pathname}
-    <div class="grid gap-2" in:fly={{ y: 64, duration: 300 }}>
-        <slot />
+    <div
+        class="mx-auto grid min-h-[calc(100vh-3.5rem)] max-w-80 content-center gap-4 py-12 pb-24"
+    >
+        <div class="flex items-center gap-2">
+            <Counter />
+            <span class="text-xs text-gray-400">: TIMES CLICKED OUTSIDE</span>
+        </div>
+
+        {#key $page.url.pathname}
+            <div class="grid gap-2" in:fly={{ y: 64, duration: 300 }}>
+                <slot />
+            </div>
+
+            {#if $description}
+                <p
+                    class="text-xs leading-5 text-gray-400"
+                    in:fly={{ y: 32, duration: 300, delay: 100 }}
+                >
+                    {@html $description}
+                </p>
+            {/if}
+        {/key}
     </div>
-
-    {#if $description}
-        <p
-            class="text-xs leading-5 text-gray-400"
-            in:fly={{ y: 32, duration: 300, delay: 100 }}
-        >
-            {@html $description}
-        </p>
-    {/if}
-{/key}
+</div>
