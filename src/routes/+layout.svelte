@@ -11,11 +11,11 @@
         if (navigating) {
             // prettier-ignore
             if ($page.url.pathname === "/") {
-				$description = `Click outside of COMPONENT to increase the counter. The component captures the event for you, so you can for example use it to close a dropdown, a menu, or do whatever.`
+				$description = "Listen to clicks that happen outside."
 			} else if ($page.url.pathname === "/exclude") {
-				$description = "You can exclude some elements from triggering the event."
+				$description = "Exclude elements from triggering the event."
 			} else if ($page.url.pathname === "/half-click") {
-				$description = "Trigger the event on pointer-down instead of a full click action (pointer-down + pointer-up)."
+				$description = "Trigger the event on pointer-down instead of a full click action."
 			}
         }
     }
@@ -24,7 +24,10 @@
 <LoadingBar />
 
 <div class="relative flex items-center justify-between gap-4">
-    <Counter />
+    <div class="flex items-center gap-2">
+        <Counter />
+        <span class="text-xs text-gray-400">: TIMES CLICKED OUTSIDE</span>
+    </div>
     <Menu />
 </div>
 
