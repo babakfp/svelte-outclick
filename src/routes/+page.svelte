@@ -3,6 +3,6 @@
     import OutClick from "svelte-outclick"
 </script>
 
-<OutClick class="box bg-stripes-blue-400/10" on:outclick={() => $count++}>
-    COMPONENT CONTENT
+<OutClick class="box box--blue" on:outclick={() => $count++}>
+    COMPONENT
 </OutClick>

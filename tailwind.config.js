@@ -11,13 +11,13 @@ export default {
                 gray: colors.neutral,
             },
             fontFamily: {
-                sans: ["Inter", defaultTheme.fontFamily.sans],
+                sans: ["Exo 2", defaultTheme.fontFamily.sans],
             },
         },
     },
     plugins: [
         function ({ theme, matchUtilities }) {
-            const backgroundSize = "9.07px 9.07px"
+            const backgroundSize = "4px 4px"
             const backgroundImage = color =>
                 `linear-gradient(135deg, ${color} 10%, transparent 10%, transparent 50%, ${color} 50%, ${color} 60%, transparent 60%, transparent 100%)`
 
