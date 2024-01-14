@@ -2,7 +2,7 @@
     import { navigating, page } from "$app/stores"
     import Counter from "$lib/Counter.svelte"
     import Menu from "$lib/Menu.svelte"
-    import { description } from "$lib/description.js"
+    import { description } from "$lib/description"
     import "../app.postcss"
     import { LoadingBar } from "svelte-loading-bar"
     import { fly } from "svelte/transition"
