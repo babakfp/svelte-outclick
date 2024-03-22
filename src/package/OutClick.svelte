@@ -1,6 +1,11 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte"
-    const dispatch = createEventDispatcher()
+
+    const dispatch = createEventDispatcher<{ outclick: Detail }>()
+
+    type Detail = {
+        target: HTMLElement
+    }
 
     // Wrapper tag
     export let tag: string = "div"
@@ -28,7 +33,7 @@
     // DOM element that wraps everything that goes inside the component slot
     let wrapper: HTMLElement
 
-    const didClickOnExcludedElement = (target: HTMLElement): boolean => {
+    const didClickOnExcludedElement = (target: Detail["target"]): boolean => {
         let status: boolean = false
 
         if (excludeElementsArray && excludeElementsArray.length > 0) {
@@ -53,7 +58,7 @@
         return status
     }
 
-    const isOutsideEventHappen = (target: HTMLElement): boolean => {
+    const isOutsideEventHappen = (target: Detail["target"]): boolean => {
         if (
             (includeSelf && wrapper.contains(target)) ||
             (!wrapper.contains(target) && !didClickOnExcludedElement(target))
@@ -65,7 +70,7 @@
     }
 
     const handlePointerdown = (e: PointerEvent): void => {
-        const target = e.target as HTMLElement
+        const target = e.target as Detail["target"]
 
         if (isOutsideEventHappen(target)) {
             if (halfClick) {
@@ -77,7 +82,7 @@
     }
 
     const handlePointerup = (e: PointerEvent): void => {
-        const target = e.target as HTMLElement
+        const target = e.target as Detail["target"]
 
         if (halfClick) return
 
@@ -89,7 +94,7 @@
     }
 
     const handleKeydown = (e: KeyboardEvent): void => {
-        const target = e.target as HTMLElement
+        const target = e.target as Detail["target"]
 
         if (
             // With `on:click`, the A11Y `keydown` event doesn't trigger on `document.body`, so we are just duplicating the same behavior here.
