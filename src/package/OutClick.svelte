@@ -65,9 +65,11 @@
     }
 
     const handlePointerdown = (e: PointerEvent): void => {
-        if (isOutsideEventHappen(e.target as HTMLElement)) {
+        const target = e.target as HTMLElement
+
+        if (isOutsideEventHappen(target)) {
             if (halfClick) {
-                dispatch("outclick")
+                dispatch("outclick", { target })
             } else {
                 isPointerdownTriggered = true
             }
@@ -75,25 +77,28 @@
     }
 
     const handlePointerup = (e: PointerEvent): void => {
+        const target = e.target as HTMLElement
+
         if (halfClick) return
-        if (
-            isOutsideEventHappen(e.target as HTMLElement) &&
-            isPointerdownTriggered
-        ) {
-            dispatch("outclick")
+
+        if (isOutsideEventHappen(target) && isPointerdownTriggered) {
+            dispatch("outclick", { target })
         }
+
         isPointerdownTriggered = false
     }
 
     const handleKeydown = (e: KeyboardEvent): void => {
+        const target = e.target as HTMLElement
+
         if (
             // With `on:click`, the A11Y `keydown` event doesn't trigger on `document.body`, so we are just duplicating the same behavior here.
-            e.target !== document.body &&
+            target !== document.body &&
             // With `on:click`, the A11Y `keydown`, only these keys trigger the event
             ["Enter", "NumpadEnter", "Space"].includes(e.code)
         ) {
-            if (isOutsideEventHappen(e.target as HTMLElement)) {
-                dispatch("outclick")
+            if (isOutsideEventHappen(target)) {
+                dispatch("outclick", { target })
             }
         }
     }
