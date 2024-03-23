@@ -1,11 +1,11 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte"
 
-    const dispatch = createEventDispatcher<{ outclick: Detail }>()
+    const dispatch = createEventDispatcher<{
+        outclick: { target: HTMLElement }
+    }>()
 
-    type Detail = {
-        target: HTMLElement
-    }
+    type Detail = Parameters<typeof dispatch>[1]
 
     // Wrapper tag
     export let tag: string = "div"
