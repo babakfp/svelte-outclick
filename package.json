@@ -27,7 +27,7 @@
     ],
     "peerDependencies": {
         "@sveltejs/kit": "1.x || 2.x",
-        "svelte": "3.x || 4.x"
+        "svelte": ">= 4.2.12"
     },
     "peerDependenciesMeta": {
         "@sveltejs/kit": {
