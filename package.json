@@ -16,15 +16,6 @@
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
     },
-    "exports": {
-        ".": {
-            "types": "./dist/OutClick.svelte.d.ts",
-            "svelte": "./dist/OutClick.svelte"
-        }
-    },
-    "files": [
-        "dist"
-    ],
     "peerDependencies": {
         "svelte": ">= 4.2.12"
     },
@@ -48,7 +39,22 @@
         "typescript": "5.4.3",
         "vite": "5.2.3"
     },
+    "exports": {
+        ".": {
+            "types": "./dist/OutClick.svelte.d.ts",
+            "svelte": "./dist/OutClick.svelte"
+        }
+    },
+    "files": [
+        "dist"
+    ],
     "types": "./dist/OutClick.svelte.d.ts",
     "svelte": "./dist/OutClick.svelte",
+    "keywords": [
+        "svelte",
+        "outclick",
+        "outside",
+        "click"
+    ],
     "type": "module"
 }
