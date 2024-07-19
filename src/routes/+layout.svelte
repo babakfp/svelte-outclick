@@ -32,7 +32,7 @@
     >
         <div class="flex items-center gap-2">
             <Counter />
-            <span class="text-xs text-gray-400">: TIMES CLICKED OUTSIDE</span>
+            <span class="text-xs text-gray-400">TIMES CLICKED OUTSIDE</span>
         </div>
 
         {#key $page.url.pathname}
