@@ -1,8 +1,7 @@
+import type { Config } from "tailwindcss"
 import colors from "tailwindcss/colors"
-import defaultTheme from "tailwindcss/defaultTheme"
 import { default as flattenColorPalette } from "tailwindcss/lib/util/flattenColorPalette"
 
-/** @type {import("tailwindcss").Config} */
 export default {
     content: ["./src/**/*.{html,svelte}"],
     theme: {
@@ -11,19 +10,19 @@ export default {
                 gray: colors.neutral,
             },
             fontFamily: {
-                sans: ["Exo2", defaultTheme.fontFamily.sans],
+                sans: "Exo2",
             },
         },
     },
     plugins: [
-        function ({ theme, matchUtilities }) {
+        ({ theme, matchUtilities }) => {
             const backgroundSize = "4px 4px"
-            const backgroundImage = (color) =>
+            const backgroundImage = (color: string) =>
                 `linear-gradient(135deg, ${color} 10%, transparent 10%, transparent 50%, ${color} 50%, ${color} 60%, transparent 60%, transparent 100%)`
 
             matchUtilities(
                 {
-                    "bg-stripes": (value) => ({
+                    "bg-stripes": (value: string) => ({
                         "background-image": backgroundImage(value),
                         "background-size": backgroundSize,
                     }),
@@ -35,4 +34,4 @@ export default {
             )
         },
     ],
-}
+} satisfies Config
