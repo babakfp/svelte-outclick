@@ -11,7 +11,7 @@ export default {
                 gray: colors.neutral,
             },
             fontFamily: {
-                sans: ['"Exo 2 Variable"', defaultTheme.fontFamily.sans],
+                sans: ["Exo2", defaultTheme.fontFamily.sans],
             },
         },
     },

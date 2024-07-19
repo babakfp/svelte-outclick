@@ -12,6 +12,25 @@
             content="A Svelte component that allows you to listen to the clicks that happen outside of an element."
         />
 
+        <link
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="/Exo2-VariableFont_wght.woff2"
+            crossorigin="anonymous"
+        />
+
+        <style>
+            @font-face {
+                font-family: "Exo2";
+                font-style: normal;
+                font-display: swap;
+                font-weight: 300 1000;
+                src: url("/Exo2-VariableFont_wght.woff2")
+                    format("woff2-variations");
+            }
+        </style>
+
         %sveltekit.head%
     </head>
     <body class="bg-gray-900 text-gray-300 bg-stripes-gray-400/[0.02]">
