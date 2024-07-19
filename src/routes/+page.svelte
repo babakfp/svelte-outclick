@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { count } from "$lib/count"
     import OutClick from "svelte-outclick"
+    import { count } from "$lib/count"
 </script>
 
 <OutClick class="box box--blue" on:outclick={() => $count++}>

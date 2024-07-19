@@ -18,12 +18,12 @@ export default {
     plugins: [
         function ({ theme, matchUtilities }) {
             const backgroundSize = "4px 4px"
-            const backgroundImage = color =>
+            const backgroundImage = (color) =>
                 `linear-gradient(135deg, ${color} 10%, transparent 10%, transparent 50%, ${color} 50%, ${color} 60%, transparent 60%, transparent 100%)`
 
             matchUtilities(
                 {
-                    "bg-stripes": value => ({
+                    "bg-stripes": (value) => ({
                         "background-image": backgroundImage(value),
                         "background-size": backgroundSize,
                     }),
