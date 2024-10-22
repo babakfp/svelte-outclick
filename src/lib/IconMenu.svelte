@@ -1,5 +1,5 @@
 <script lang="ts">
-    const {
+    let {
         class: class_,
     }: {
         class?: string

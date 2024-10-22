@@ -3,7 +3,7 @@
     import { castArray } from "./castArray.js"
     import type { OutClickEvent } from "./OutClickEvent.js"
 
-    const {
+    let {
         tag = "div",
         class: class_,
         excludeElements,

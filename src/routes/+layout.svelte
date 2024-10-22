@@ -7,7 +7,7 @@
     import Counter from "$lib/Counter.svelte"
     import Menu from "$lib/Menu.svelte"
 
-    const {
+    let {
         children,
     }: {
         children: Snippet
