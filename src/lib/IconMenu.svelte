@@ -1,8 +1,9 @@
 <script lang="ts">
-    type Props = {
+    const {
+        class: class_,
+    }: {
         class?: string
-    }
-    const { class: class_ }: Props = $props()
+    } = $props()
 </script>
 
 <!-- prettier-ignore -->

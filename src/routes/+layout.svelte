@@ -7,10 +7,11 @@
     import Counter from "$lib/Counter.svelte"
     import Menu from "$lib/Menu.svelte"
 
-    type Props = {
+    const {
+        children,
+    }: {
         children: Snippet
-    }
-    const { children }: Props = $props()
+    } = $props()
 
     let description = $state("Listen to clicks that happen outside.")
     $effect(() => {

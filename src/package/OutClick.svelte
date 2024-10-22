@@ -3,7 +3,17 @@
     import { castArray } from "./castArray.js"
     import type { OutClickEvent } from "./OutClickEvent.js"
 
-    type Props = {
+    const {
+        tag = "div",
+        class: class_,
+        excludeElements,
+        excludeQuerySelectorAll,
+        includeSelf,
+        halfClick,
+        children,
+        onOutClick,
+        ...restProps
+    }: {
         /** Wrapper tag. */
         tag?: string
         /** To use it as HTML `class` attr. */
@@ -22,19 +32,7 @@
         onOutClick?: (event: OutClickEvent) => void
         /** Any other props (`restProps`). */
         [key: string]: any
-    }
-
-    const {
-        tag = "div",
-        class: class_,
-        excludeElements,
-        excludeQuerySelectorAll,
-        includeSelf,
-        halfClick,
-        children,
-        onOutClick,
-        ...restProps
-    }: Props = $props()
+    } = $props()
 
     /** The developer can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`. */
     const excludeElementsArray = $derived<HTMLElement[]>(
