@@ -29,7 +29,7 @@
         /** The component children. */
         children: Snippet
         /** The main `onOutClick` event handler. */
-        onOutClick?: (event: OutClickEvent) => void
+        onOutClick: (event: OutClickEvent) => void
         /** Any other props (`restProps`). */
         [key: string]: any
     } = $props()
@@ -91,7 +91,7 @@
     const handlePointerdown = (e: PointerEvent): void => {
         if (isOutsideEventHappen(e.target)) {
             if (halfClick) {
-                onOutClick?.(e)
+                onOutClick(e)
             } else {
                 isPointerDownTriggered = true
             }
@@ -102,7 +102,7 @@
         if (halfClick) return
 
         if (isOutsideEventHappen(e.target) && isPointerDownTriggered) {
-            onOutClick?.(e)
+            onOutClick(e)
         }
 
         isPointerDownTriggered = false
@@ -116,7 +116,7 @@
             ["Enter", "NumpadEnter", "Space"].includes(e.code)
         ) {
             if (isOutsideEventHappen(e.target)) {
-                onOutClick?.(e)
+                onOutClick(e)
             }
         }
     }
