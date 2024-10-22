@@ -7,7 +7,7 @@ export default {
     kit: {
         adapter: adapter(),
         alias: {
-            "svelte-outclick": "src/package/OutClick.svelte",
+            "svelte-outclick": "src/package/index.ts",
         },
     },
 }

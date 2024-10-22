@@ -1,11 +1,11 @@
 <script lang="ts">
-    import OutClick from "svelte-outclick"
-    import { count } from "$lib/count"
+    import { OutClick } from "svelte-outclick"
+    import { count } from "$lib/count.svelte.js"
 </script>
 
 <OutClick
     class="box box--blue"
-    on:outclick={() => $count++}
+    onOutClick={() => (count.value += 1)}
     excludeQuerySelectorAll="#nothing-happens"
 >
     COMPONENT

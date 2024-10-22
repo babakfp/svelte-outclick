@@ -1,24 +1,27 @@
 <script lang="ts">
     import "../app.postcss"
+    import type { Snippet } from "svelte"
     import { LoadingBar } from "svelte-loading-bar"
     import { fly } from "svelte/transition"
     import { navigating, page } from "$app/stores"
     import Counter from "$lib/Counter.svelte"
-    import { description } from "$lib/description"
     import Menu from "$lib/Menu.svelte"
 
-    $: {
-        if (navigating) {
-            // prettier-ignore
-            if ($page.url.pathname === "/") {
-				$description = "Listen to clicks that happen outside."
-			} else if ($page.url.pathname === "/exclude") {
-				$description = "Exclude elements from triggering the event."
-			} else if ($page.url.pathname === "/half-click") {
-				$description = "Trigger the event on pointer-down instead of a full click action."
-			}
-        }
+    type Props = {
+        children: Snippet
     }
+    const { children }: Props = $props()
+
+    let description = $state("Listen to clicks that happen outside.")
+    $effect(() => {
+        if (!navigating) return
+        if ($page.url.pathname === "/exclude") {
+            description = "Exclude elements from triggering the event."
+        }
+        if ($page.url.pathname === "/half-click") {
+            description = "Trigger on pointer-down instead of full click."
+        }
+    })
 </script>
 
 <LoadingBar />
@@ -36,15 +39,15 @@
 
         {#key $page.url.pathname}
             <div class="grid gap-2" in:fly={{ y: 64, duration: 300 }}>
-                <slot />
+                {@render children()}
             </div>
 
-            {#if $description}
+            {#if description}
                 <p
                     class="text-xs leading-5 text-gray-400"
                     in:fly={{ y: 32, duration: 300, delay: 100 }}
                 >
-                    {@html $description}
+                    {@html description}
                 </p>
             {/if}
         {/key}

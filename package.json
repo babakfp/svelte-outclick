@@ -1,6 +1,6 @@
 {
     "name": "svelte-outclick",
-    "version": "3.7.1",
+    "version": "4.0.0",
     "description": "A Svelte component that allows you to listen to the clicks that happen outside of an element.",
     "license": "MIT",
     "repository": "github:babakfp/svelte-outclick",
@@ -21,35 +21,35 @@
     },
     "devDependencies": {
         "@ianvs/prettier-plugin-sort-imports": "4.3.1",
-        "@sveltejs/adapter-vercel": "5.4.1",
-        "@sveltejs/kit": "2.5.18",
-        "@sveltejs/package": "2.3.2",
-        "@sveltejs/vite-plugin-svelte": "3.1.1",
-        "autoprefixer": "10.4.19",
-        "postcss": "8.4.39",
+        "@sveltejs/adapter-vercel": "5.4.5",
+        "@sveltejs/kit": "2.7.2",
+        "@sveltejs/package": "2.3.5",
+        "@sveltejs/vite-plugin-svelte": "4.0.0",
+        "autoprefixer": "10.4.20",
+        "postcss": "8.4.47",
         "prettier": "3.3.3",
-        "prettier-plugin-svelte": "3.2.6",
-        "prettier-plugin-tailwindcss": "0.6.5",
-        "publint": "0.2.9",
-        "svelte": "4.2.18",
-        "svelte-check": "3.8.4",
-        "svelte-loading-bar": "1.2.0",
-        "tailwindcss": "3.4.6",
-        "tslib": "2.6.3",
-        "typescript": "5.5.3",
-        "vite": "5.3.4"
-    },
-    "exports": {
-        ".": {
-            "types": "./dist/OutClick.svelte.d.ts",
-            "svelte": "./dist/OutClick.svelte"
-        }
+        "prettier-plugin-svelte": "3.2.7",
+        "prettier-plugin-tailwindcss": "0.6.8",
+        "publint": "0.2.11",
+        "svelte": "5.0.5",
+        "svelte-check": "4.0.5",
+        "svelte-loading-bar": "2.0.2",
+        "tailwindcss": "3.4.14",
+        "tslib": "2.8.0",
+        "typescript": "5.6.3",
+        "vite": "5.4.9"
     },
     "files": [
         "dist"
     ],
-    "types": "./dist/OutClick.svelte.d.ts",
-    "svelte": "./dist/OutClick.svelte",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "svelte": "./dist/index.js"
+        }
+    },
+    "types": "./dist/index.d.ts",
+    "svelte": "./dist/index.js",
     "keywords": [
         "svelte",
         "outclick",

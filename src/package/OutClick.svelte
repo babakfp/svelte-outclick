@@ -1,40 +1,58 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte"
+    import { type Snippet } from "svelte"
+    import { castArray } from "./castArray.js"
+    import type { OutClickEvent } from "./OutClickEvent.js"
 
-    const dispatch = createEventDispatcher<{
-        outclick: { target: HTMLElement }
-    }>()
+    type Props = {
+        /** Wrapper tag. */
+        tag?: string
+        /** To use it as HTML `class` attr. */
+        class?: string
+        /** DOM elements to exclude from triggering the `outclick` event. */
+        excludeElements?: HTMLElement | HTMLElement[]
+        /** DOM elements to exclude from triggering the `outclick` event. */
+        excludeQuerySelectorAll?: string
+        /** If the wrapper did contain the event target, allow the `outclick` event to dispatch. */
+        includeSelf?: boolean
+        /** Should the outclick event happen on (`pointerdown`) or (`pointerdown` + `pointerup`). */
+        halfClick?: boolean
+        /** The component children. */
+        children: Snippet
+        /** The main `onOutClick` event handler. */
+        onOutClick?: (event: OutClickEvent) => void
+        /** Any other props (`restProps`). */
+        [key: string]: any
+    }
 
-    type Detail = Parameters<typeof dispatch>[1]
+    const {
+        tag = "div",
+        class: class_,
+        excludeElements,
+        excludeQuerySelectorAll,
+        includeSelf,
+        halfClick,
+        children,
+        onOutClick,
+        ...restProps
+    }: Props = $props()
 
-    // Wrapper tag
-    export let tag: string = "div"
+    /** The developer can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`. */
+    const excludeElementsArray = $derived<HTMLElement[]>(
+        excludeElements ? castArray(excludeElements) : [],
+    )
 
-    // To use it as HTML `class` attr
-    let className: string = ""
-    export { className as class }
+    /** Using to handle full-click functionality. Simulating the core click event without having this issue: https://github.com/babakfp/svelte-outclick/issues/4. */
+    let isPointerDownTriggered = false
 
-    // DOM elements to exclude from triggering the `outclick` event
-    export let excludeElements: HTMLElement | HTMLElement[] = []
-    export let excludeQuerySelectorAll: string = ""
+    /** DOM element that wraps everything that goes inside the component slot. */
+    let wrapper = $state<HTMLElement>()
 
-    // Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
-    $: excludeElementsArray = excludeElements ? castArray(excludeElements) : []
+    const didClickOnExcludedElement = (
+        target: OutClickEvent["target"],
+    ): boolean => {
+        if (!(target instanceof Node)) return false
 
-    // If the wrapper did contain the event target, allow the `outclick` event to dispatch
-    export let includeSelf: boolean = false
-
-    // Should the outclick event happen on (`pointerdown`) or (`pointerdown` + `pointerup`)
-    export let halfClick: boolean = false
-
-    // Using to handle full-click functionality. Simulating the core click event without having this issue: https://github.com/babakfp/svelte-outclick/issues/4
-    let isPointerdownTriggered: boolean = false
-
-    // DOM element that wraps everything that goes inside the component slot
-    let wrapper: HTMLElement
-
-    const didClickOnExcludedElement = (target: Detail["target"]): boolean => {
-        let status: boolean = false
+        let status = false
 
         if (excludeElementsArray && excludeElementsArray.length > 0) {
             for (const element of excludeElementsArray) {
@@ -58,7 +76,10 @@
         return status
     }
 
-    const isOutsideEventHappen = (target: Detail["target"]): boolean => {
+    const isOutsideEventHappen = (target: OutClickEvent["target"]): boolean => {
+        if (!wrapper) return false
+        if (!(target instanceof Node)) return false
+
         if (
             (includeSelf && wrapper.contains(target)) ||
             (!wrapper.contains(target) && !didClickOnExcludedElement(target))
@@ -70,62 +91,52 @@
     }
 
     const handlePointerdown = (e: PointerEvent): void => {
-        const target = e.target as Detail["target"]
-
-        if (isOutsideEventHappen(target)) {
+        if (isOutsideEventHappen(e.target)) {
             if (halfClick) {
-                dispatch("outclick", { target })
+                onOutClick?.(e)
             } else {
-                isPointerdownTriggered = true
+                isPointerDownTriggered = true
             }
         }
     }
 
     const handlePointerup = (e: PointerEvent): void => {
-        const target = e.target as Detail["target"]
-
         if (halfClick) return
 
-        if (isOutsideEventHappen(target) && isPointerdownTriggered) {
-            dispatch("outclick", { target })
+        if (isOutsideEventHappen(e.target) && isPointerDownTriggered) {
+            onOutClick?.(e)
         }
 
-        isPointerdownTriggered = false
+        isPointerDownTriggered = false
     }
 
     const handleKeydown = (e: KeyboardEvent): void => {
-        const target = e.target as Detail["target"]
-
         if (
             // With `on:click`, the A11Y `keydown` event doesn't trigger on `document.body`, so we are just duplicating the same behavior here.
-            target !== document.body &&
+            e.target !== document.body &&
             // With `on:click`, the A11Y `keydown`, only these keys trigger the event
             ["Enter", "NumpadEnter", "Space"].includes(e.code)
         ) {
-            if (isOutsideEventHappen(target)) {
-                dispatch("outclick", { target })
+            if (isOutsideEventHappen(e.target)) {
+                onOutClick?.(e)
             }
         }
-    }
-
-    function castArray(value: any): any[] {
-        return Array.isArray(value) ? value : [value]
     }
 </script>
 
 <!-- Have this to capture the events -->
 <svelte:window
-    on:pointerdown={handlePointerdown}
-    on:pointerup={handlePointerup}
-    on:keydown={handleKeydown}
+    onpointerdown={handlePointerdown}
+    onpointerup={handlePointerup}
+    onkeydown={handleKeydown}
 />
 
 <svelte:element
     this={tag}
     bind:this={wrapper}
-    class={className || undefined}
-    style={!className ? "display: contents" : null}
-    {...$$restProps}
+    class={class_ || undefined}
+    style={class_ ? undefined : "display: contents"}
+    {...restProps}
 >
-    <slot />
+    {@render children()}
 </svelte:element>
