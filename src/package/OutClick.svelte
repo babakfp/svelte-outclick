@@ -1,7 +1,8 @@
-<script lang="ts">
-    import { type Snippet } from "svelte"
+<script lang="ts" generics="Tag extends OptionalHtmlTags">
+    import type { Snippet } from "svelte"
     import { castArray } from "./castArray.js"
     import type { OutClickEvent } from "./OutClickEvent.js"
+    import type { OptionalHtmlTags, RestProps } from "./types.js"
 
     let {
         tag = "div",
@@ -15,7 +16,7 @@
         ...restProps
     }: {
         /** Wrapper tag. */
-        tag?: string
+        tag?: Tag
         /** To use it as HTML `class` attr. */
         class?: string
         /** DOM elements to exclude from triggering the `outclick` event. */
@@ -31,8 +32,7 @@
         /** The main `onOutClick` event handler. */
         onOutClick: (event: OutClickEvent) => void
         /** Any other props (`restProps`). */
-        [key: string]: any
-    } = $props()
+    } & RestProps<Tag, "div"> = $props()
 
     /** The developer can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`. */
     const excludeElementsArray = $derived<HTMLElement[]>(
