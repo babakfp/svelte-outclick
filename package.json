@@ -7,11 +7,11 @@
     "homepage": "https://babakfp.ir/docs/svelte-outclick",
     "scripts": {
         "dev": "vite dev",
-        "build": "vite build && pnpm run package",
+        "build": "vite build && pnpm package",
         "preview": "vite preview",
         "prepare": "svelte-kit sync",
         "package": "svelte-kit sync && svelte-package -i src/package && publint",
-        "prepublishOnly": "pnpm run package",
+        "prepublishOnly": "pnpm package",
         "format": "prettier -w .",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
