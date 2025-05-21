@@ -1,12 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
 
 @layer base {
     * {
         @apply select-none;
     }
-
     svg.icon {
         @apply pointer-events-none inline-block h-[1em] w-[1em] fill-current;
     }
@@ -17,9 +15,9 @@
         @apply relative z-10 flex h-20 items-center justify-center rounded border-2 border-dashed border-gray-700 bg-gray-900 text-center text-xs;
     }
     .box--blue {
-        @apply border-blue-400/60 bg-stripes-blue-400/20;
+        @apply bg-stripes-blue-400/20 border-blue-400/60;
     }
     .box--green {
-        @apply border-green-400/60 bg-stripes-green-400/20;
+        @apply bg-stripes-green-400/20 border-green-400/60;
     }
 }

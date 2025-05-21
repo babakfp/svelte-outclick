@@ -1,5 +1,5 @@
 <script lang="ts">
-    import "../app.postcss"
+    import "../app.css"
     import type { Snippet } from "svelte"
     import { LoadingBar } from "svelte-loading-bar"
     import { fly } from "svelte/transition"
