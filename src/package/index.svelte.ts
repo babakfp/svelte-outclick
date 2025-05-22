@@ -1,9 +1,12 @@
 import type { Attachment } from "svelte/attachments"
-import { castArray } from "./castArray.js"
-import type { OutClickEvent } from "./OutClickEvent.js"
 
-type OnOutClickOnOutClick = (event: OutClickEvent) => void
-type OnOutClickOptions = {
+export const castArray = (value: any) => {
+    return Array.isArray(value) ? value : [value]
+}
+
+export type OutClickEvent = PointerEvent | KeyboardEvent
+export type OnOutClickOnOutClick = (event: OutClickEvent) => void
+export type OnOutClickOptions = {
     /** DOM elements to exclude from triggering the `outclick` event. */
     excludeElements?: HTMLElement | HTMLElement[]
     /** DOM elements to exclude from triggering the `outclick` event. */
@@ -23,8 +26,6 @@ export const outClick = (
         halfClick,
     }: OnOutClickOptions = {},
 ): Attachment => {
-    console.log("onOutClick")
-
     return (wrapper) => {
         /** The developer can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`. */
         const excludeElementsArray: HTMLElement[] = excludeElements
