@@ -27,9 +27,9 @@ export const outClick = (
 
     return (wrapper) => {
         /** The developer can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`. */
-        const excludeElementsArray = $derived<HTMLElement[]>(
-            excludeElements ? castArray(excludeElements) : [],
-        )
+        const excludeElementsArray: HTMLElement[] = excludeElements
+            ? castArray(excludeElements)
+            : []
 
         /** Using to handle full-click functionality. Simulating the core click event without having this issue: https://github.com/babakfp/svelte-outclick/issues/4. */
         let isPointerDownTriggered = false
