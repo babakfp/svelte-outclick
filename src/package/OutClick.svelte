@@ -1,5 +1,6 @@
 <script lang="ts" generics="Tag extends OptionalHtmlTags">
     import type { Snippet } from "svelte"
+    import type { ClassValue } from "svelte/elements"
     import { castArray } from "./castArray.js"
     import type { OutClickEvent } from "./OutClickEvent.js"
     import type { OptionalHtmlTags, RestProps } from "./types.js"
@@ -18,7 +19,7 @@
         /** Wrapper tag. */
         tag?: Tag
         /** To use it as HTML `class` attr. */
-        class?: string
+        class?: ClassValue
         /** DOM elements to exclude from triggering the `outclick` event. */
         excludeElements?: HTMLElement | HTMLElement[]
         /** DOM elements to exclude from triggering the `outclick` event. */
