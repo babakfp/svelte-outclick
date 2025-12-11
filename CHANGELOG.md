@@ -5,6 +5,10 @@ title: CHANGELOG
 > [!IMPORTANT]
 > Restart your app after updating the package.
 
+## 4.2.0
+
+- [feature] Use `ClassValue` for class attribute type instead of `string`.
+
 ## 4.1.0
 
 - [feature] Added `tag` prop and rest props type suggestion support with generic type support based on the `tag` prop.
